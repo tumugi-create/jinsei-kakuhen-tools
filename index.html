@@ -67,11 +67,16 @@ a.tool .go { font-size: 1.5rem; }
     <span><b>ザ・マジック</b><small>28日間の感謝の実践（ロンダ・バーン）</small></span>
     <span class="go">›</span>
   </a>
+  <a class="tool" href="こうして、思考は現実になる/">
+    <span class="ic"><svg viewBox="0 0 24 24"><path d="M9.5 3.5h5M10.5 3.5v5.2L5.4 17.6A2 2 0 0 0 7.1 20.5h9.8a2 2 0 0 0 1.7-2.9L13.5 8.7V3.5"/><path d="M7.6 14.5h8.8"/></svg></span>
+    <span><b>こうして、思考は現実になる</b><small>9つの実験ノート（パム・グラウト）</small></span>
+    <span class="go">›</span>
+  </a>
   <div class="soon">ここに新しいツールが増えていきます</div>
 </div>
 <script>
 // 新しい版をあげた時、スマホに古いページが残っていても自動で読み直す（あげ直すたびに VERSION を変える）
-const VERSION = '2026-10-29.6';
+const VERSION = '2026-10-29.7';
 fetch(location.pathname + '?t=' + Date.now(), { cache: 'no-store' }).then(r => r.text()).then(t => {
   const v = t.match(/const VERSION = '([^']+)'/)?.[1];
   let done = null; try { done = sessionStorage.getItem('reloadedFor'); } catch (e) {}

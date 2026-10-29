@@ -1,0 +1,885 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="実験ノート">
+<meta name="theme-color" content="#a55bd3">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>こうして、思考は現実になる</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fdf6fa;
+  --card: #ffffff;
+  --ink: #2e2442;
+  --muted: #74688a;
+  --line: #efe2ee;
+  --field: #fffafd;
+  --purple: #7350d6;
+  --pink: #e8568f;
+  --peach: #f48a62;
+  --lav: #f0eaff;
+  --pink-soft: #ffe7f0;
+  --peach-soft: #fff0e7;
+  --shadow: 0 2px 0 rgba(115,80,214,.06), 0 8px 24px rgba(115,80,214,.08);
+  --bg-art: radial-gradient(circle at 10% 6%, rgba(179,156,255,.45), transparent 40%),
+    radial-gradient(circle at 95% 24%, rgba(255,150,195,.42), transparent 42%),
+    radial-gradient(circle at 14% 70%, rgba(255,188,158,.38), transparent 44%),
+    radial-gradient(circle at 88% 94%, rgba(196,168,255,.4), transparent 42%),
+    linear-gradient(165deg, #f3ecff 0%, #fdeef6 48%, #fff1ea 100%);
+  --bg-dots: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='%23e8568f' fill-opacity='.12'%3E%3Cpath d='M22 30s-6-3.7-6-8a3.4 3.4 0 0 1 6-2.2 3.4 3.4 0 0 1 6 2.2c0 4.3-6 8-6 8z'/%3E%3Ccircle cx='76' cy='20' r='2'/%3E%3Ccircle cx='26' cy='78' r='1.6'/%3E%3C/g%3E%3Cg fill='%237350d6' fill-opacity='.11'%3E%3Cpath d='M70 58c.6 3.3 1.8 4.5 5 5-3.2.6-4.4 1.8-5 5-.6-3.2-1.8-4.4-5-5 3.2-.5 4.4-1.7 5-5z'/%3E%3Ccircle cx='50' cy='46' r='1.4'/%3E%3C/g%3E%3C/svg%3E");
+  --bar: rgba(255,255,255,.86);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1a1426; --card: #251c36; --ink: #f4eefb; --muted: #bbb0d2; --line: #3b2f53; --field: #1f182e;
+    --purple: #b39cff; --pink: #ff8fbd; --peach: #ffb093; --lav: #30264a; --pink-soft: #3d2338; --peach-soft: #3a2a27;
+    --shadow: 0 2px 0 rgba(0,0,0,.2), 0 8px 24px rgba(0,0,0,.25);
+    --bg-art: radial-gradient(circle at 10% 6%, rgba(115,80,214,.45), transparent 42%),
+    radial-gradient(circle at 95% 24%, rgba(232,86,143,.3), transparent 42%),
+    radial-gradient(circle at 14% 72%, rgba(244,138,98,.18), transparent 44%),
+    radial-gradient(circle at 88% 94%, rgba(165,91,211,.32), transparent 42%),
+    linear-gradient(165deg, #1d1530 0%, #22172f 50%, #26182a 100%);
+    --bg-dots: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='%23ff8fbd' fill-opacity='.10'%3E%3Cpath d='M22 30s-6-3.7-6-8a3.4 3.4 0 0 1 6-2.2 3.4 3.4 0 0 1 6 2.2c0 4.3-6 8-6 8z'/%3E%3Ccircle cx='76' cy='20' r='2'/%3E%3Ccircle cx='26' cy='78' r='1.6'/%3E%3C/g%3E%3Cg fill='%23b39cff' fill-opacity='.10'%3E%3Cpath d='M70 58c.6 3.3 1.8 4.5 5 5-3.2.6-4.4 1.8-5 5-.6-3.2-1.8-4.4-5-5 3.2-.5 4.4-1.7 5-5z'/%3E%3Ccircle cx='50' cy='46' r='1.4'/%3E%3C/g%3E%3C/svg%3E");
+    --bar: rgba(37,28,54,.88);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1a1426; --card: #251c36; --ink: #f4eefb; --muted: #bbb0d2; --line: #3b2f53; --field: #1f182e;
+  --purple: #b39cff; --pink: #ff8fbd; --peach: #ffb093; --lav: #30264a; --pink-soft: #3d2338; --peach-soft: #3a2a27;
+  --shadow: 0 2px 0 rgba(0,0,0,.2), 0 8px 24px rgba(0,0,0,.25);
+    --bg-art: radial-gradient(circle at 10% 6%, rgba(115,80,214,.45), transparent 42%),
+    radial-gradient(circle at 95% 24%, rgba(232,86,143,.3), transparent 42%),
+    radial-gradient(circle at 14% 72%, rgba(244,138,98,.18), transparent 44%),
+    radial-gradient(circle at 88% 94%, rgba(165,91,211,.32), transparent 42%),
+    linear-gradient(165deg, #1d1530 0%, #22172f 50%, #26182a 100%);
+    --bg-dots: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='%23ff8fbd' fill-opacity='.10'%3E%3Cpath d='M22 30s-6-3.7-6-8a3.4 3.4 0 0 1 6-2.2 3.4 3.4 0 0 1 6 2.2c0 4.3-6 8-6 8z'/%3E%3Ccircle cx='76' cy='20' r='2'/%3E%3Ccircle cx='26' cy='78' r='1.6'/%3E%3C/g%3E%3Cg fill='%23b39cff' fill-opacity='.10'%3E%3Cpath d='M70 58c.6 3.3 1.8 4.5 5 5-3.2.6-4.4 1.8-5 5-.6-3.2-1.8-4.4-5-5 3.2-.5 4.4-1.7 5-5z'/%3E%3Ccircle cx='50' cy='46' r='1.4'/%3E%3C/g%3E%3C/svg%3E");
+    --bar: rgba(37,28,54,.88);
+}
+/* 文字の大きさ（設定で切りかえ） */
+html { font-size: 18px; }
+html[data-size="m"] { font-size: 16px; }
+html[data-size="l"] { font-size: 19px; }
+html[data-size="xl"] { font-size: 22px; }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", "Hiragino Sans", sans-serif;
+  font-size: 1rem;
+  line-height: 1.8;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+/* 背景：ふんわりした色に、うすいハートと星 */
+body::before, body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: -1; }
+body::before { background: var(--bg-art); }
+body::after { background-image: var(--bg-dots); background-size: 96px 96px; }
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 12px 16px calc(110px + env(safe-area-inset-bottom)); }
+h1, h2, h3 { font-family: "Kiwi Maru", "Hiragino Maru Gothic ProN", serif; font-weight: 500; line-height: 1.45; margin: 0; }
+button { font: inherit; color: inherit; cursor: pointer; }
+svg.ico { width: 1.4em; height: 1.4em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+input, textarea {
+  font: inherit; font-size: max(16px, 1rem); color: var(--ink); background: var(--field);
+  border: 1.5px solid var(--line); border-radius: 14px; padding: 10px 14px; width: 100%; min-height: 3rem;
+}
+input::placeholder, textarea::placeholder { color: var(--muted); opacity: .7; }
+input:focus, textarea:focus { outline: 3px solid var(--pink-soft); border-color: var(--pink); }
+textarea { min-height: 6rem; resize: vertical; }
+
+header.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 4px 0 12px; }
+header.top h1 { font-size: 1.3rem; display: flex; align-items: center; gap: 6px; }
+header.top h1 .ico { color: var(--pink); width: 1.1em; height: 1.1em; fill: var(--pink-soft); }
+header.top h1 small { display: block; font-family: "M PLUS Rounded 1c", sans-serif; font-size: .68rem; color: var(--muted); font-weight: 400; }
+.total { text-align: right; font-size: .7rem; color: var(--muted); white-space: nowrap; }
+.total b { display: block; font-family: "Kiwi Maru", serif; font-size: 1.35rem; color: var(--pink); line-height: 1.2; font-weight: 500; }
+
+/* タブ：スマホは画面の下、PCは上 */
+nav.tabs {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+  display: flex; background: var(--bar); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-top: 1px solid var(--line);
+  padding: 4px 4px calc(4px + env(safe-area-inset-bottom)); box-shadow: 0 -4px 16px rgba(115,80,214,.06);
+}
+nav.tabs button {
+  flex: 1; border: 0; background: transparent; border-radius: 14px; color: var(--muted);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  min-height: 60px; padding: 4px 2px; font-size: .72rem; line-height: 1.3;
+}
+nav.tabs button .ico { width: 1.5rem; height: 1.5rem; }
+nav.tabs button[aria-current="true"] { background: var(--pink-soft); color: var(--pink); font-weight: 700; }
+@media (min-width: 768px) {
+  .wrap { padding-bottom: 48px; }
+  nav.tabs { position: sticky; top: 8px; bottom: auto; border: 1px solid var(--line); border-radius: 18px; margin-bottom: 16px; box-shadow: var(--shadow); padding: 4px; gap: 4px; }
+  nav.tabs button { flex-direction: row; gap: 6px; min-height: 44px; font-size: .9rem; }
+  nav.tabs button .ico { width: 1.15rem; height: 1.15rem; }
+}
+
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 20px; margin-bottom: 16px; box-shadow: var(--shadow); }
+.card h3 { font-size: 1.15rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.hint { color: var(--muted); font-size: .9rem; margin: 0 0 12px; }
+.bubble { width: 2.4rem; height: 2.4rem; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.bubble .ico { width: 1.35rem; height: 1.35rem; }
+.bubble.m { background: var(--peach-soft); color: var(--peach); }
+.bubble.p { background: var(--pink-soft); color: var(--pink); }
+.bubble.r { background: var(--lav); color: var(--purple); }
+.voice { display: flex; gap: 8px; align-items: flex-start; font-size: .85rem; background: var(--lav); color: var(--purple); border-radius: 14px; padding: 8px 12px; margin: 0 0 14px; }
+.voice .ico { margin-top: .2em; width: 1.2em; height: 1.2em; }
+
+/* いろどりの見出し */
+.hero {
+  position: relative; overflow: hidden; text-align: center; color: #fff; border: 0;
+  background: linear-gradient(140deg, #6a4fd8 0%, #a55bd3 40%, #ec6a9f 75%, #f99a74 100%);
+  padding: 26px 18px 22px; box-shadow: 0 10px 28px rgba(165,91,211,.25);
+}
+.hero::before, .hero::after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; }
+.hero::before { width: 220px; height: 220px; right: -70px; top: -90px; background: radial-gradient(circle, rgba(255,255,255,.28), rgba(255,255,255,0) 70%); }
+.hero::after { width: 180px; height: 180px; left: -60px; bottom: -80px; background: radial-gradient(circle, rgba(255,214,190,.45), rgba(255,214,190,0) 70%); }
+.hero > * { position: relative; z-index: 1; }
+.hero .deco { position: absolute; z-index: 0; color: rgba(255,255,255,.55); fill: rgba(255,255,255,.25); stroke-width: 1.4; }
+.hero .deco.a { width: 26px; height: 26px; left: 18px; top: 16px; animation: twinkle 3.2s ease-in-out infinite; }
+.hero .deco.b { width: 16px; height: 16px; right: 28px; top: 54px; animation: twinkle 2.6s ease-in-out .6s infinite; }
+.hero .deco.c { width: 20px; height: 20px; right: 46%; bottom: 14px; animation: twinkle 3.6s ease-in-out 1.2s infinite; }
+@keyframes twinkle { 50% { opacity: .35; transform: scale(.8) rotate(12deg); } }
+.hero .num { color: #fff3e8; font-size: .85rem; letter-spacing: .08em; font-weight: 700; }
+.hero h2 { font-size: 1.7rem; margin: 4px 0 4px; }
+.hero .lead { margin: 6px 0 0; color: rgba(255,255,255,.95); }
+.hero .phase { display: inline-block; margin-top: 12px; font-size: .75rem; color: #fff; background: rgba(255,255,255,.18); border-radius: 999px; padding: 2px 12px; }
+.ring-wrap { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 16px; }
+.ring { width: 84px; height: 84px; flex: none; }
+.ring circle { fill: none; stroke-width: 9; }
+.ring .bg { stroke: rgba(255,255,255,.25); }
+.ring .fg { stroke: #fff; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 50% 50%; transition: stroke-dashoffset .8s cubic-bezier(.3,1.4,.5,1); }
+.ring text { fill: #fff; font-size: 21px; text-anchor: middle; dominant-baseline: central; font-family: "Kiwi Maru", serif; }
+.ring-msg { text-align: left; font-size: .9rem; line-height: 1.5; color: #fff; }
+.ring-msg b { display: block; font-size: 1.05rem; font-family: "Kiwi Maru", serif; font-weight: 500; }
+
+.streak { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+.streak span { display: inline-flex; align-items: center; gap: 6px; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 4px 14px; font-size: .85rem; box-shadow: var(--shadow); }
+.streak .ico { width: 1.1em; height: 1.1em; color: var(--pink); }
+.streak b { color: var(--purple); font-size: 1.05rem; font-family: "Kiwi Maru", serif; font-weight: 500; }
+
+.sec-title { font-size: 1.05rem; margin: 4px 4px 10px; color: var(--muted); }
+.secs { display: grid; gap: 12px; margin-bottom: 16px; }
+.sec-btn {
+  display: grid; grid-template-columns: 3.2rem 1fr auto; align-items: center; gap: 12px; text-align: left;
+  width: 100%; min-height: 5rem; padding: 14px 16px; border-radius: 22px;
+  background: var(--card); border: 2px solid var(--line); box-shadow: var(--shadow); transition: transform .1s;
+}
+.sec-btn:active { transform: scale(.98); }
+.sec-btn .ic { width: 3.2rem; height: 3.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.sec-btn .ic .ico { width: 1.7rem; height: 1.7rem; }
+.sec-btn .ic.m { background: var(--peach-soft); color: var(--peach); }
+.sec-btn .ic.p { background: var(--pink-soft); color: var(--pink); }
+.sec-btn .ic.r { background: var(--lav); color: var(--purple); }
+.sec-btn .tx { min-width: 0; }
+.sec-btn .tx b { display: block; font-size: 1.1rem; font-family: "Kiwi Maru", serif; font-weight: 500; }
+.sec-btn .tx small { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: var(--muted); font-size: .85rem; overflow: hidden; line-height: 1.5; }
+.sec-btn .st { display: inline-flex; align-items: center; gap: 4px; font-size: .85rem; font-weight: 700; color: var(--purple); background: var(--lav); border-radius: 999px; padding: 4px 12px; white-space: nowrap; }
+.sec-btn .st .ico { width: 1em; height: 1em; stroke-width: 2.6; }
+.sec-btn.ok { border-color: var(--pink); }
+.sec-btn.ok .st { background: var(--pink); color: #fff; }
+.sec-btn:not(.ok) .ic .ico { animation: bob 2.8s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(-3px) rotate(-6deg); } }
+
+.back { display: inline-flex; align-items: center; gap: 4px; border: 0; background: transparent; color: var(--purple); font-weight: 700; padding: 8px 4px 12px; min-height: 48px; font-size: 1rem; }
+
+.daynav { display: flex; justify-content: space-between; gap: 8px; margin: 8px 0 16px; }
+.daynav button { border: 1px solid var(--line); background: var(--card); border-radius: 999px; padding: 6px 16px; min-height: 44px; font-size: .85rem; color: var(--muted); }
+.daynav button:disabled { opacity: .35; cursor: default; }
+
+ol.steps { margin: 0; padding-left: 1.5em; }
+ol.steps li { margin-bottom: 6px; }
+ol.steps li::marker { color: var(--pink); font-family: "Kiwi Maru", serif; }
+
+.row { display: grid; grid-template-columns: 1.8rem 1fr auto; gap: 8px 10px; align-items: start; margin-bottom: 16px; }
+.row .no {
+  width: 1.8rem; height: 1.8rem; margin-top: .6rem; border-radius: 50%; background: var(--pink-soft); color: var(--pink);
+  display: flex; align-items: center; justify-content: center; font-family: "Kiwi Maru", serif; font-size: .9rem;
+}
+.row .fields { display: grid; gap: 6px; min-width: 0; }
+.row .fields input.why { font-size: max(16px, .9rem); min-height: 2.6rem; }
+.row.solo { grid-template-columns: 1fr auto; align-items: center; }
+
+.thx {
+  border: 2px solid var(--pink); background: var(--card); color: var(--pink); font-weight: 700;
+  border-radius: 999px; padding: 6px 16px; min-height: 3rem; white-space: nowrap; min-width: 9.5rem;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-size: .95rem; transition: transform .1s;
+}
+.thx:active { transform: scale(.96); }
+.thx .dots { display: inline-flex; gap: 4px; }
+.thx .dots i { width: .75rem; height: .75rem; border-radius: 50%; border: 2px solid var(--pink); }
+.thx .dots i.on { background: var(--pink); }
+.thx.full { background: linear-gradient(135deg, #7350d6, #e8568f); color: #fff; border-color: transparent; animation: pop .45s ease-out; }
+.thx.full .dots i { border-color: #fff; background: #fff; }
+@keyframes pop { 40% { transform: scale(1.08); } }
+
+.person { border-top: 1.5px dashed var(--line); padding-top: 16px; margin-top: 16px; }
+.person:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.person .pname { display: grid; grid-template-columns: 1fr auto; gap: 8px; margin-bottom: 10px; }
+.person .pname input { font-weight: 700; }
+
+label.chk { display: flex; gap: 12px; align-items: center; padding: 8px 0; min-height: 48px; cursor: pointer; }
+label.chk input { width: 28px; height: 28px; min-height: 0; accent-color: var(--pink); flex: none; }
+.field { margin-bottom: 18px; }
+.field > .lbl { display: block; font-size: .95rem; font-weight: 700; margin-bottom: 6px; }
+
+.counter { text-align: center; }
+.counter .big { font-family: "Kiwi Maru", serif; font-size: 3rem; color: var(--pink); line-height: 1.15; }
+.counter .big small { font-size: 1rem; color: var(--muted); }
+.bar { height: 12px; background: var(--pink-soft); border-radius: 999px; overflow: hidden; margin: 10px 0 14px; }
+.bar > i { display: block; height: 100%; background: linear-gradient(90deg, #7350d6, #e8568f, #f48a62); border-radius: 999px; transition: width .3s; }
+.btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.btn { border: 1.5px solid var(--line); background: var(--card); border-radius: 999px; padding: 10px 20px; min-height: 3rem; font-size: .95rem; }
+.btn.main { background: linear-gradient(135deg, #7350d6, #e8568f); border-color: transparent; color: #fff; font-weight: 700; box-shadow: 0 6px 16px rgba(232,86,143,.25); }
+.btn.big { padding: 14px 28px; font-size: 1.1rem; min-height: 3.6rem; }
+.btn.wide { width: 100%; max-width: 480px; }
+.btn.ghost { background: transparent; }
+.btn.danger { color: #c63b4f; border-color: #f0b6c0; }
+
+.breath { text-align: center; }
+.orb { width: 140px; height: 140px; margin: 8px auto 12px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffe3ee, #e8568f 60%, #7350d6);
+  transform: scale(.55); transition: transform 4s ease-in-out; opacity: .9; }
+.orb.in { transform: scale(1); }
+.breath .say { min-height: 1.8em; font-weight: 700; font-size: 1.1rem; }
+
+.done-box { text-align: center; }
+.done-box .stamp { font-family: "Kiwi Maru", serif; font-size: 1.2rem; color: var(--pink); margin-bottom: 6px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+
+.word { text-align: center; font-family: "Kiwi Maru", serif; font-size: 1.05rem; padding: 16px 18px; background: linear-gradient(135deg, var(--lav), var(--pink-soft)); border: 0; }
+.word small { display: block; font-family: "M PLUS Rounded 1c", sans-serif; font-size: .72rem; color: var(--purple); font-weight: 700; margin-bottom: 2px; }
+
+.journey { height: 14px; background: var(--pink-soft); border-radius: 999px; overflow: hidden; margin: 8px 0 4px; }
+.journey > i { display: block; height: 100%; background: linear-gradient(90deg, #7350d6, #e8568f, #f48a62); border-radius: 999px; transition: width .8s; }
+.map { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.map button {
+  aspect-ratio: 1; border: 1.5px solid var(--line); background: var(--card); border-radius: 14px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2px;
+  font-family: "Kiwi Maru", serif; font-size: 1.1rem; min-width: 0; line-height: 1.2;
+}
+.map button small { font-family: "M PLUS Rounded 1c", sans-serif; font-size: .58rem; color: var(--muted); }
+.map button .ico { width: .9rem; height: .9rem; }
+.map button.done { background: linear-gradient(140deg, #7350d6, #e8568f); border-color: transparent; color: #fff; }
+.map button.done small { color: #fff; opacity: .9; }
+.map button.cur { border: 2.5px solid var(--pink); animation: glow 1.8s ease-in-out infinite alternate; }
+@keyframes glow { from { box-shadow: 0 0 0 0 rgba(232,86,143,0); } to { box-shadow: 0 0 0 5px rgba(232,86,143,.2); } }
+.map button.mile:not(.done) { border-style: dashed; border-color: var(--peach); color: var(--peach); }
+.phase-lbl { font-size: .85rem; color: var(--purple); margin: 16px 0 6px; font-weight: 700; }
+.phase-lbl:first-of-type { margin-top: 8px; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: .75rem; color: var(--muted); margin-top: 12px; }
+
+.log-item { display: grid; grid-template-columns: 4.2rem 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); cursor: pointer; min-height: 48px; }
+.log-item:first-of-type { border-top: 0; }
+.log-item .d { font-family: "Kiwi Maru", serif; color: var(--pink); }
+.log-item .d small { display: block; font-family: "M PLUS Rounded 1c", sans-serif; color: var(--muted); font-size: .7rem; }
+.log-item .best { font-size: .85rem; color: var(--muted); }
+
+.intro p { margin: 0 0 12px; }
+.three { list-style: none; padding: 0; margin: 0 0 14px; display: grid; gap: 8px; }
+.three li { display: grid; grid-template-columns: 2.6rem 1fr; gap: 10px; align-items: center; background: var(--lav); border-radius: 16px; padding: 10px 12px; }
+.three li .ic { width: 2.6rem; height: 2.6rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.three li .ic.m { background: var(--peach-soft); color: var(--peach); }
+.three li .ic.p { background: var(--pink-soft); color: var(--pink); }
+.three li .ic.r { background: var(--lav); color: var(--purple); }
+.note-small { font-size: .75rem; color: var(--muted); }
+.wish-cat { margin-bottom: 16px; }
+.wish-cat .lbl { font-weight: 700; font-size: .95rem; margin-bottom: 4px; color: var(--purple); }
+.wish-cat input { margin-bottom: 8px; }
+.opt-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.opt-row .btn { flex: 1; min-width: 6rem; }
+.opt-row .btn[aria-pressed="true"] { border: 2px solid var(--pink); background: var(--pink-soft); color: var(--pink); font-weight: 700; }
+.howto { margin: 0; padding-left: 1.3em; font-size: .9rem; }
+
+.toast { position: fixed; left: 50%; bottom: calc(90px + env(safe-area-inset-bottom)); transform: translateX(-50%) translateY(20px); opacity: 0;
+  background: var(--ink); color: var(--bg); padding: 12px 22px; border-radius: 999px; font-size: 1rem;
+  transition: all .3s; pointer-events: none; z-index: 20; max-width: calc(100% - 32px); text-align: center; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+@media (min-width: 768px) { .toast { bottom: 24px; } }
+
+/* キラッと・声かけ */
+.sparkle { position: fixed; pointer-events: none; z-index: 30; width: 18px; height: 18px; animation: up .9s ease-out forwards; }
+.sparkle svg { width: 100%; height: 100%; }
+@keyframes up { from { opacity: 1; transform: translate(-50%, 0) scale(.6) rotate(0); } to { opacity: 0; transform: translate(-50%, -46px) scale(1.2) rotate(40deg); } }
+.cheer { position: fixed; pointer-events: none; z-index: 31; font-weight: 700; color: #fff; background: linear-gradient(135deg, #7350d6, #e8568f);
+  border-radius: 999px; padding: 4px 14px; font-size: .9rem; white-space: nowrap; animation: cheer 1.3s ease-out forwards; }
+@keyframes cheer { 0% { opacity: 0; transform: translate(-50%, 0) scale(.7); } 20% { opacity: 1; transform: translate(-50%, -18px) scale(1.05); } 100% { opacity: 0; transform: translate(-50%, -56px) scale(1); } }
+
+/* お祝いの画面 */
+.party { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 16px;
+  background: rgba(46,36,66,.5); backdrop-filter: blur(3px); animation: fade .3s ease-out; }
+@keyframes fade { from { opacity: 0; } }
+.party .box { position: relative; z-index: 2; background: var(--card); border-radius: 28px; padding: 24px 22px 22px; text-align: center; max-width: 420px; width: 100%;
+  box-shadow: 0 20px 60px rgba(0,0,0,.3); animation: rise .5s cubic-bezier(.3,1.5,.5,1); }
+@keyframes rise { from { transform: translateY(40px) scale(.9); opacity: 0; } }
+.badge { width: 130px; height: 150px; display: block; margin: 0 auto; animation: swing 1s cubic-bezier(.3,1.5,.5,1); transform-origin: 50% 0; }
+@keyframes swing { 0% { transform: scale(.3) rotate(-25deg); opacity: 0; } 60% { transform: scale(1.05) rotate(6deg); opacity: 1; } 100% { transform: scale(1) rotate(0); } }
+.party h2 { font-size: 1.55rem; margin: 8px 0 6px; color: var(--pink); }
+.party p { margin: 0 0 16px; }
+.party .bigstat { color: var(--muted); margin-bottom: 16px; line-height: 1.6; }
+.party .bigstat b { font-family: "Kiwi Maru", serif; font-size: 1.5rem; color: var(--purple); font-weight: 500; }
+.confetti { position: fixed; top: -20px; z-index: 1; width: 10px; height: 14px; border-radius: 3px; pointer-events: none; animation: fall linear forwards; }
+@keyframes fall { to { transform: translate(var(--dx), 110vh) rotate(var(--rot)); } }
+
+/* 3日目の写真 */
+.person .photo { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+.person .photo img, .person .photo .ph-empty { width: 92px; height: 92px; border-radius: 22px; flex: none; object-fit: cover; }
+.person .photo .ph-empty { display: flex; align-items: center; justify-content: center; background: var(--pink-soft); color: var(--pink); border: 2px dashed var(--pink); }
+.person .photo .ph-empty .ico { width: 2rem; height: 2rem; }
+.ph-btns { display: flex; flex-direction: column; gap: 6px; }
+.ph-btns .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 2.8rem; padding: 6px 16px; cursor: pointer; }
+
+/* 感謝ノート */
+.note-cover h2 { font-size: 1.6rem; }
+.n-day { padding: 18px 20px; }
+.n-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; border-bottom: 1.5px dashed var(--line); padding-bottom: 8px; margin-bottom: 12px; }
+.n-head .n-no { font-family: "Kiwi Maru", serif; color: #fff; background: linear-gradient(135deg, #7350d6, #e8568f); border-radius: 999px; padding: 0 12px; font-size: .85rem; }
+.n-head b { font-family: "Kiwi Maru", serif; font-weight: 500; font-size: 1.1rem; }
+.n-head small { color: var(--muted); font-size: .8rem; margin-left: auto; }
+.n-sec { display: grid; grid-template-columns: 2.4rem 1fr; gap: 12px; margin-bottom: 12px; }
+.n-sec > div { min-width: 0; }
+.n-lbl { font-size: .8rem; font-weight: 700; color: var(--purple); margin: 2px 0 2px; }
+.n-list { margin: 0 0 8px; padding-left: 1.2em; }
+.n-list li { margin-bottom: 2px; }
+.n-list li::marker { color: var(--pink); }
+.n-list small { display: block; color: var(--muted); font-size: .85rem; }
+.n-text { margin: 0 0 8px; white-space: pre-wrap; }
+.n-person { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+.n-person img { width: 64px; height: 64px; border-radius: 16px; object-fit: cover; flex: none; }
+@media print {
+  @page { margin: 14mm; }
+  body { background: #fff !important; color: #2e2442; font-size: 11pt; }
+  body::before, body::after, nav.tabs, header.top .total, .no-print, .toast { display: none !important; }
+  .wrap { max-width: none; padding: 0; }
+  .card { box-shadow: none !important; border: 1px solid #e6d8ea; break-inside: avoid; }
+  .hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-shadow: none !important; }
+  .n-head .n-no, .bubble { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .hero .deco { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* スマホ：ありがとうボタンは入力欄の下に、横いっぱいで */
+@media (max-width: 600px) {
+  .card { padding: 16px; }
+  .row { grid-template-columns: 1.8rem 1fr; }
+  .row .thx { grid-column: 2; width: 100%; }
+  .row.solo { grid-template-columns: 1fr; }
+  .row.solo .thx { grid-column: 1; }
+  .person .pname { grid-template-columns: 1fr; }
+  .person .pname .thx { width: 100%; }
+  .hero h2 { font-size: 1.45rem; }
+  .map { gap: 4px; }
+  .map button { font-size: 1rem; border-radius: 10px; }
+}
+</style>
+<style>
+/* ---------- 実験ノートだけの部品 ---------- */
+.card h3 { flex-wrap: nowrap; }
+.theory { margin: 0 0 12px; display: grid; grid-template-columns: 4.6rem 1fr; gap: 4px 10px; font-size: .9rem; }
+.theory dt { color: var(--purple); font-weight: 700; font-size: .8rem; padding-top: .2em; }
+.theory dd { margin: 0; color: var(--ink); }
+.hero .ring-wrap { margin-top: 14px; }
+.hero .principle { display: inline-block; margin-top: 8px; font-size: .78rem; color: #fff; background: rgba(255,255,255,.18); border-radius: 999px; padding: 2px 12px; }
+.deadline { text-align: center; font-size: .85rem; color: var(--muted); margin: -6px 0 16px; }
+.deadline b { color: var(--purple); }
+.hyp { font-family: "Kiwi Maru", serif; font-size: 1.1rem; line-height: 1.7; margin: 0; padding: 12px 16px; border-radius: 16px; background: linear-gradient(135deg, var(--lav), var(--pink-soft)); }
+.prep { margin: 0 0 4px; padding-left: 1.3em; }
+.prep li::marker { color: var(--peach); }
+.logbox { display: grid; grid-template-columns: 1fr auto; gap: 8px; margin-bottom: 14px; }
+.logbox .btn { min-height: 3rem; }
+.log-list { list-style: none; margin: 0; padding: 0; }
+.log-list li { display: grid; grid-template-columns: 4.6rem 1fr auto; gap: 10px; align-items: start; padding: 10px 0; border-top: 1px dashed var(--line); }
+.log-list li:first-child { border-top: 0; }
+.log-list time { font-size: .75rem; color: var(--purple); font-weight: 700; padding-top: .2em; line-height: 1.4; }
+.log-list .x { border: 0; background: transparent; color: var(--muted); font-size: 1.1rem; min-width: 40px; min-height: 40px; }
+.results { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+.results button { border: 2px solid var(--line); background: var(--card); border-radius: 18px; padding: 12px 6px; min-height: 4.4rem; font-size: .9rem; font-weight: 700; color: var(--muted); display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.results button .ico { width: 1.6rem; height: 1.6rem; }
+.results button[aria-pressed="true"].yes { border-color: var(--pink); background: var(--pink-soft); color: var(--pink); }
+.results button[aria-pressed="true"].some { border-color: var(--peach); background: var(--peach-soft); color: var(--peach); }
+.results button[aria-pressed="true"].no { border-color: var(--purple); background: var(--lav); color: var(--purple); }
+.timeup { background: linear-gradient(135deg, var(--pink-soft), var(--peach-soft)); border-radius: 14px; padding: 10px 14px; font-weight: 700; color: var(--pink); margin: 0 0 14px; }
+.chip { display: inline-flex; align-items: center; gap: 4px; font-size: .78rem; font-weight: 700; border-radius: 999px; padding: 3px 12px; white-space: nowrap; }
+.chip.todo { background: var(--bg); color: var(--muted); border: 1px solid var(--line); }
+.chip.active { background: linear-gradient(135deg, #7350d6, #e8568f); color: #fff; }
+.chip.yes { background: var(--pink-soft); color: var(--pink); }
+.chip.some { background: var(--peach-soft); color: var(--peach); }
+.chip.no { background: var(--lav); color: var(--purple); }
+.exp-row { display: grid; grid-template-columns: 2.6rem 1fr auto; gap: 12px; align-items: center; width: 100%; text-align: left; background: transparent; border: 0; border-top: 1px solid var(--line); padding: 14px 2px; min-height: 4.6rem; }
+.exp-row:first-of-type { border-top: 0; }
+.exp-row .num { width: 2.6rem; height: 2.6rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: "Kiwi Maru", serif; background: var(--pink-soft); color: var(--pink); font-size: 1.05rem; }
+.exp-row.done .num { background: linear-gradient(135deg, #7350d6, #e8568f); color: #fff; }
+.exp-row .tx { min-width: 0; }
+.exp-row .tx b { display: block; font-family: "Kiwi Maru", serif; font-weight: 500; font-size: 1.05rem; line-height: 1.5; }
+.exp-row .tx small { display: block; color: var(--muted); font-size: .8rem; line-height: 1.5; }
+.rep { padding: 18px 20px; }
+.rep .n-head { margin-bottom: 10px; }
+.rep dl { margin: 0; display: grid; grid-template-columns: 5.5rem 1fr; gap: 6px 12px; }
+.rep dt { font-size: .8rem; font-weight: 700; color: var(--purple); padding-top: .25em; }
+.rep dd { margin: 0; min-width: 0; white-space: pre-wrap; }
+.rep dd ul { margin: 0; padding-left: 1.1em; white-space: normal; }
+@media (max-width: 600px) {
+  .logbox { grid-template-columns: 1fr; }
+  .rep dl { grid-template-columns: 1fr; gap: 0 0; }
+  .rep dt { margin-top: 8px; }
+  .results button { font-size: .82rem; }
+}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<div class="toast" id="toast"></div>
+<input type="file" id="importFile" accept="application/json,.json" hidden>
+
+<script>
+// 各実験の内容は、本の要点を自分の言葉で短くまとめたもの。くわしいやり方は本で確かめる。
+const EXPS = [
+  { t: '宇宙のエネルギーの法則', en: 'The Dude Abides Principle', hours: 48,
+    theory: '目に見えないエネルギーの力（FP＝可能性の場）は本当にあって、いつでも自分の味方をしてくれる。',
+    q: '目に見えない力は、本当にあるのだろうか？',
+    hyp: '期限を決めて「いるなら証拠を見せて」と頼むと、48時間以内に、偶然とは思えない贈りものやしるしが届く。',
+    lead: '見えない力が本当にあるのか、贈りものを頼んで確かめます。',
+    decl: '宇宙さん、今から48時間あげます。あなたが本当にいるなら、はっきりわかる贈りものを届けてください。偶然とは思えない形で。',
+    prep: ['特になし（ノートかメモがあれば十分）'],
+    steps: ['呼びかける相手を決める（宇宙、神様など、しっくりくる呼び方でよい）', '宣言を書いて、実験をはじめる。ここから48時間が期限', '贈りものの中身は決めない。何が届くかは、おまかせする', '「わたしなんかに」という遠慮や疑いは手放して、届くと期待する', '小さなことも見逃さずに探し、見つけたら観察ノートに書く'],
+    f: [] },
+  { t: 'フォルクスワーゲン・ジェッタの法則', en: 'The Volkswagen Jetta Principle', hours: 48,
+    theory: '人は、自分が探しているものを見る。意識を向けたものが、目の前に現れる。',
+    q: 'わたしは本当に、自分が見ると決めたものを見ているのだろうか？',
+    hyp: '見ると決めたものは、探せばびっくりするほどたくさん見つかる。',
+    lead: '探すと決めたものが、どれだけ目に入るかを数えます。',
+    decl: '今から24時間、黄色い車を探します。そのあとの24時間は、黄色い蝶（または紫の羽根）を探します。',
+    prep: ['特になし（外に出る予定がある日がおすすめ）'],
+    steps: ['最初の24時間は、黄色い車を探す', '見つけたら、下のボタンで数える', '次の24時間は、黄色い蝶（または紫の羽根）を探す。絵や写真で見かけたものも数えてよい', '家の中より、外に出て探す'],
+    f: [{ type: 'counter', key: 'car', unit: '台', label: '最初の24時間：黄色い車' },
+        { type: 'text', key: 'target2', label: '次の24時間に探すもの', ph: '黄色い蝶 または 紫の羽根' },
+        { type: 'counter', key: 'second', unit: '回', label: '次の24時間：見つけた数' }] },
+  { t: 'アインシュタインの法則', en: 'The Alby Einstein Principle', hours: 2,
+    theory: 'わたしもエネルギーでできていて、考え方がそのエネルギーに影響する。',
+    q: 'わたしがエネルギーでできているというのは本当だろうか？',
+    hyp: '考えることを変えると、手に持った針金（ダウジングロッド）の向きが変わる。',
+    lead: '針金で作った棒を持って、考えでエネルギーが動くかを確かめます。',
+    decl: 'わたしはエネルギーでできている。考えを変えると針の向きが変わることを、この目で確かめます。',
+    prep: ['針金ハンガー 2本', 'ストロー 1本', 'ペンチ（針金を曲げる道具）'],
+    steps: ['ハンガーをほどいてまっすぐにし、長い方が約30cm、短い方が約13cmのL字に曲げる（2本作る）', 'ストローを半分に切って短い方に通し、抜けないよう先を曲げる。ストローを握ると針金がくるくる回る', '左右の手に1本ずつ持って胸の前で構え、揺れがおさまるまで待つ', 'いやな出来事を強く思い出す → 針の向きを見る', '楽しいこと、うれしいことを考える → 針の向きを見る', '少し離れたものに意識を向ける → 針の向きを見る'],
+    f: [{ type: 'text', key: 'neg', label: 'いやな出来事を思い出した時、針は？', ph: '例：内側に向いて交差した' },
+        { type: 'text', key: 'pos', label: '楽しいことを考えた時、針は？', ph: '例：外側にひらいた' },
+        { type: 'text', key: 'aim', label: '離れたものに意識を向けた時、針は？', ph: '例：右の窓のほうを指した' }] },
+  { t: 'アブラカタブラの法則', en: 'The Abracadabra Principle', hours: 48,
+    theory: '意識を向けたものは、大きくなる。',
+    q: '考えるだけで、何もないところから何かを呼びよせられるだろうか？',
+    hyp: 'ほしいものを細かく思い描いて意識を向けると、48時間以内にそれが届く。',
+    lead: 'ほしいものを具体的に決めて、48時間以内に届くかを確かめます。',
+    decl: '48時間以内に、ここに書いたものがわたしのもとに届きます。届き方はおまかせします。',
+    prep: ['特になし'],
+    steps: ['ほしいものを決めて、色や形、種類まで細かく書く', '48時間で届くと自分が信じられる大きさにする（花束、お菓子、ごちそうしてもらう、など）', '届いたところを思い浮かべて、うれしい気持ちを味わう', '「無理かも」「運が悪いし」という考えには乗らない', 'どうやって届くかは考えない。届き方はおまかせする'],
+    f: [{ type: 'list', key: 'wants', n: 3, label: 'ほしいもの（細かく）', ph: '例：ピンクのガーベラの花束' }] },
+  { t: '人生相談の法則', en: 'The Dear Abby Principle', hours: 48,
+    theory: '見えない力とつながれば、いつでも正確な導き（答え）がもらえる。',
+    q: '迷っていることに、本当に答えが返ってくるのだろうか？',
+    hyp: '自分では決められない質問を投げると、48時間以内にはっきりした答えが届く。',
+    lead: '迷っていることを1つ質問して、答えが届くかを確かめます。',
+    decl: 'この質問に、わかりやすく、はっきりした答えをください。期限は48時間です。',
+    prep: ['特になし'],
+    steps: ['自分では答えが出せない、はっきりした質問を1つ決める（小さなことから大きなことまで）', '宣言を書いて、48時間のアンテナを張る', '答えは、選ぶ道が1つにしぼられる・もっといい3つ目の道が出てくる・体の感じ（胸が落ち着く、おなかがざわつく）・声や夢など、いろいろな形で来る', '答えが来たら、聞きたくない答えでも否定せずに受け取る', '大事なことを聞く時は、質問とタイミングをよく考える'],
+    f: [{ type: 'text', key: 'q5', label: '答えがほしい質問', ph: '例：来年の旅行は、沖縄と北海道のどちらがいい？' },
+        { type: 'note', key: 'ans', label: '届いた答え', ph: 'どこで、どんな形で届いたか' }] },
+  { t: 'ハートブレイク・ホテルの法則', en: 'The Superhero Principle（と思われる）', hours: 168,
+    theory: '思いや意識は、物（ここでは豆の芽）に影響する。',
+    q: '自分の意識で、物に影響を与えられるのだろうか？',
+    hyp: '片側の豆にだけ「早く育て」と念じると、そちらが先に、よく育つ。',
+    lead: '豆を育てて、念じた側が早く育つかを1週間確かめます。',
+    decl: 'これから1週間、こちら側の豆に「早く育て」と念じます。意識が物に届くかを確かめます。',
+    prep: ['空の卵パック', '園芸用の土', 'インゲン豆の種', '水'],
+    steps: ['卵パックのくぼみに土を入れ、種を2つずつまく', '日の当たる窓辺に置き、土が乾かないよう水をやる', '片側（たとえば左の列）の豆にだけ、毎日「早く育て」と念じる。もう片側には何もしない', 'いやな言葉はかけない', '1週間、毎日両側を見くらべて記録する（写真をとっておくのもおすすめ）'],
+    f: [{ type: 'text', key: 'side', label: '念じる側', ph: '例：左の列' },
+        { type: 'days', key: 'grow', n: 7, label: '毎日の様子（念じた側 ／ 何もしない側）', ph: '例：念じた側は土が少し盛り上がった ／ 変化なし' }] },
+  { t: '魔法のダイエットの法則', en: 'The Jenny Craig Principle', hours: 72,
+    theory: '体は、自分の体への思いに合わせて形を変える。食べものにも、思いが届く。',
+    q: '自分の思いは、食べものや体に影響するのだろうか？',
+    hyp: '食べものと体に愛のある思いを向けると、食事を変えなくても体重が減る。',
+    lead: '食べものを祝福して、3日間で体が変わるかを確かめます。',
+    decl: 'これから3日間、食べものを祝福し、自分の体には愛のある言葉だけをかけます。',
+    prep: ['体重計'],
+    steps: ['はじめる日の朝、体重を量って書く', '食事はふだんどおり。量を減らしたりはしない', '自分の体をけなす言葉はやめる。浮かんだら、逆のやさしい言葉に言いかえる', '食べる前・飲む前に、手をかざして祝福し、愛のある思いを送る', '楽しい気持ち、おだやかな気持ちで食べる', '3日目の終わり（または次の日の朝）に、もう一度体重を量る'],
+    f: [{ type: 'text', key: 'w0', label: 'はじめる前の体重', ph: '例：62.4kg' },
+        { type: 'counter', key: 'bless', unit: '回', label: '祝福してから食べた・飲んだ回数' },
+        { type: 'text', key: 'w1', label: '3日後の体重', ph: '例：62.0kg' }] },
+  { t: '101匹わんちゃんの法則', en: 'The 101 Dalmatians Principle', hours: 48,
+    theory: 'わたしは、すべてのもの・すべての人とつながっている。',
+    q: '離れたところにいる人に、心だけでメッセージを送れるだろうか？',
+    hyp: '電話もメールも使わずに思いを送ると、48時間以内に、相手から届いたしるしが返ってくる。',
+    lead: '離れた人に、心だけでメッセージを送れるかを確かめます。',
+    decl: '心だけで、この人にメッセージを送ります。48時間以内に、届いたしるしが返ってきます。',
+    prep: ['特になし'],
+    steps: ['メッセージを送る相手を1人決める（会ったことのある人がよい）', '相手にしてほしい反応を決める（電話をくれる、など）', '相手の姿を、心の中ではっきり思い浮かべる', '相手とつながっている感じを体で味わい、メッセージを送る', '送るのは、やさしく明るい内容だけにする', '反応を待ち、届いたことを観察ノートに書く'],
+    f: [{ type: 'text', key: 'who', label: 'メッセージを送る相手', ph: '例：大阪にいる姉' },
+        { type: 'text', key: 'msg', label: 'してほしい反応', ph: '例：電話をかけてきてくれる' }] },
+  { t: '魚とパンの法則', en: 'The Fish and Loaves Principle', hours: 48,
+    theory: '宇宙は限りなく豊かで、必要なものはもう満ちている。',
+    q: 'わたしが悪いところばかり見ているから、世界の本当の姿が見えていないのだろうか？',
+    hyp: '足りないものではなく、いいもの・美しいものを探すと、世界はいいことでいっぱいだと気づく。',
+    lead: '48時間、世の中のいいことだけを探して数えます。',
+    decl: '今から48時間、世の中のいいこと、美しいものだけを探して、数えます。',
+    prep: ['特になし（メモを持ち歩けると便利）'],
+    steps: ['48時間、身のまわりのいいこと・美しいもの・感謝できることを探す', '人の親切も、小さなことも、ぜんぶ数える', '見つけたら下のボタンで数え、観察ノートに書く', '寝る前に、その日のいいことをふり返ってもよい'],
+    f: [{ type: 'counter', key: 'good', unit: '個', label: '見つけたいいこと・美しいもの' }] },
+];
+
+const KEY = 'e2.v1';
+const fresh = () => ({ v: 1, exps: {}, theme: 'auto', size: null });
+let S = load();
+let ui = { tab: 'now', n: null };
+let tick = null;
+
+function load() {
+  try { return Object.assign(fresh(), JSON.parse(localStorage.getItem(KEY)) || {}); } catch (e) { return fresh(); }
+}
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { toast('保存できませんでした（ブラウザの設定を確認してください）'); }
+}
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+function getP(obj, path) { return path.split('.').reduce((o, k) => (o == null ? undefined : o[k]), obj); }
+function setP(obj, path, val) {
+  const ks = path.split('.'); let o = obj;
+  for (let i = 0; i < ks.length - 1; i++) o = (o[ks[i]] ??= {});
+  o[ks[ks.length - 1]] = val;
+}
+const pad = x => String(x).padStart(2, '0');
+const fmtDT = iso => { const d = new Date(iso); return `${d.getMonth() + 1}/${d.getDate()} ${d.getHours()}:${pad(d.getMinutes())}`; };
+const fmtD = iso => { const d = new Date(iso); return `${d.getMonth() + 1}/${d.getDate()}`; };
+const today = () => { const d = new Date(); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; };
+
+// ---------- 絵（線で描いたアイコン） ----------
+const IC = {
+  flask: '<path d="M9.5 3.5h5M10.5 3.5v5.2L5.4 17.6A2 2 0 0 0 7.1 20.5h9.8a2 2 0 0 0 1.7-2.9L13.5 8.7V3.5"/><path d="M7.6 14.5h8.8"/>',
+  spark: '<path d="M11 3.5c.7 4 2.2 5.5 6.2 6.2-4 .7-5.5 2.2-6.2 6.2-.7-4-2.2-5.5-6.2-6.2 4-.7 5.5-2.2 6.2-6.2z"/><path d="M18.5 14.8c.3 1.6.9 2.2 2.4 2.4-1.5.3-2.1.9-2.4 2.4-.3-1.5-.9-2.1-2.4-2.4 1.5-.2 2.1-.8 2.4-2.4z"/>',
+  eye: '<path d="M2.8 12s3.4-6.2 9.2-6.2 9.2 6.2 9.2 6.2-3.4 6.2-9.2 6.2S2.8 12 2.8 12z"/><circle cx="12" cy="12" r="2.8"/>',
+  clock: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
+  grid: '<rect x="4" y="4" width="6.5" height="6.5" rx="1.8"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.8"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.8"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.8"/>',
+  book: '<path d="M12 6.6C10 5 7 4.5 4 5v13.6c3-.5 6 0 8 1.6 2-1.6 5-2.1 8-1.6V5c-3-.5-6 0-8 1.6z"/><path d="M12 6.6v13.6"/>',
+  tune: '<path d="M4 7.5h9.5M18 7.5h2M4 16.5h3.5M11.5 16.5H20"/><circle cx="15.8" cy="7.5" r="2.2"/><circle cx="9.5" cy="16.5" r="2.2"/>',
+  check: '<path d="M5.5 12.5l4.2 4.2L18.5 8"/>',
+  heart: '<path d="M12 20s-7.4-4.5-7.4-10a4.2 4.2 0 0 1 7.4-2.7A4.2 4.2 0 0 1 19.4 10c0 5.5-7.4 10-7.4 10z"/>',
+  wave: '<path d="M3.5 12c2 0 2-3 4.2-3s2.2 6 4.3 6 2.1-6 4.3-6 2.2 3 4.2 3"/>',
+  moon: '<path d="M19.2 14.6A7.6 7.6 0 0 1 9.4 4.8a7.8 7.8 0 1 0 9.8 9.8z"/>',
+  list: '<path d="M9 6.5h11M9 12h11M9 17.5h11"/><circle cx="5" cy="6.5" r="1.2"/><circle cx="5" cy="12" r="1.2"/><circle cx="5" cy="17.5" r="1.2"/>',
+};
+const ico = (k, cls = '') => `<svg class="ico ${cls}" viewBox="0 0 24 24" aria-hidden="true">${IC[k]}</svg>`;
+const RES = { yes: ['起きた！', 'spark'], some: ['少し起きた', 'wave'], no: ['起きなかった', 'moon'] };
+
+// ---------- 状態 ----------
+const touch = matchMedia('(pointer: coarse)').matches;
+const curSize = () => S.size || (touch ? 'l' : 'm');
+const rec = n => (S.exps[n] ??= { data: {}, log: [] });
+function status(n) { const r = S.exps[n]; return !r?.start ? 'todo' : r.result ? 'done' : 'active'; }
+const activeN = () => EXPS.findIndex((_, i) => status(i + 1) === 'active') + 1;
+const nextTodo = () => { for (let i = 1; i <= EXPS.length; i++) if (status(i) === 'todo') return i; return 0; };
+const currentN = () => activeN() || nextTodo() || EXPS.length;
+const doneCount = () => EXPS.filter((_, i) => status(i + 1) === 'done').length;
+const endsAt = n => new Date(S.exps[n].start).getTime() + EXPS[n - 1].hours * 3600e3;
+function fmtLeft(ms) {
+  if (ms <= 0) return '時間になりました';
+  const h = Math.floor(ms / 3600e3), m = Math.floor(ms % 3600e3 / 60e3);
+  return h >= 72 ? `あと ${Math.floor(h / 24)}日${h % 24}時間` : `あと ${h}時間${m}分`;
+}
+const durLabel = h => h % 24 === 0 && h >= 72 ? `${h / 24}日間` : `${h}時間`;
+
+// ---------- 書く欄 ----------
+function inp(path, ph = '', cls = '') {
+  return `<input type="text" class="${cls}" data-k="${path}" value="${esc(getP(rec(ui.n).data, path))}" placeholder="${esc(ph)}">`;
+}
+function field(f) {
+  const d = rec(ui.n).data, lbl = f.label ? `<span class="lbl">${esc(f.label)}</span>` : '';
+  switch (f.type) {
+    case 'text': return `<div class="field">${lbl}${inp(f.key, f.ph)}</div>`;
+    case 'note': return `<div class="field">${lbl}<textarea data-k="${f.key}" placeholder="${esc(f.ph || '')}">${esc(d[f.key])}</textarea></div>`;
+    case 'list': {
+      let h = '';
+      for (let i = 0; i < f.n; i++) h += `<div class="row solo" style="grid-template-columns:1.8rem 1fr"><div class="no">${i + 1}</div><div class="fields">${inp(`${f.key}.${i}`, i === 0 ? f.ph : '')}</div></div>`;
+      return `<div class="field">${lbl}${h}</div>`;
+    }
+    case 'check': return `<div class="field">${lbl}${f.items.map((it, i) =>
+      `<label class="chk"><input type="checkbox" data-k="${f.key}.${i}" ${getP(d, `${f.key}.${i}`) ? 'checked' : ''}>${esc(it)}</label>`).join('')}</div>`;
+    case 'counter': {
+      const v = +d[f.key] || 0, pct = f.target ? Math.min(100, v / f.target * 100) : 0;
+      return `<div class="field counter">${lbl}<div class="big">${v}<small>${f.target ? ` / ${f.target}` : ''}${f.unit}</small></div>
+        ${f.target ? `<div class="bar"><i style="width:${pct}%"></i></div>` : ''}
+        <div class="btns"><button class="btn main big" data-act="count" data-k="${f.key}" data-d="1">＋1</button>
+        <button class="btn ghost" data-act="count" data-k="${f.key}" data-d="-1">1つ戻す</button></div></div>`;
+    }
+    case 'days': {
+      let h = '';
+      for (let i = 0; i < f.n; i++) h += `<div class="row solo" style="grid-template-columns:4.2rem 1fr"><div class="no" style="width:auto;border-radius:999px;padding:0 8px">${i + 1}日目</div><div class="fields">${inp(`${f.key}.${i}`, i === 0 ? f.ph : '')}</div></div>`;
+      return `<div class="field">${lbl}${h}</div>`;
+    }
+  }
+  return '';
+}
+
+// ---------- 画面 ----------
+function render() {
+  const root = document.documentElement;
+  if (S.theme === 'auto') delete root.dataset.theme; else root.dataset.theme = S.theme;
+  root.dataset.size = curSize();
+  if (ui.n == null) ui.n = currentN();
+  const tabs = [['now', 'flask', '実験'], ['list', 'grid', '9つの実験'], ['log', 'book', 'レポート'], ['set', 'tune', '設定']];
+  let h = `<header class="top"><h1>${ico('flask')}<span>実験ノート<small>こうして、思考は現実になる</small></span></h1>
+    <div class="total">終えた実験<b>${doneCount()} / ${EXPS.length}</b></div></header>
+    <nav class="tabs">${tabs.map(([k, i, l]) => `<button data-act="tab" data-tab="${k}" aria-current="${ui.tab === k}">${ico(i)}${l}</button>`).join('')}</nav>`;
+  h += { now: viewNow, list: viewList, log: viewLog, set: viewSet }[ui.tab]();
+  app.innerHTML = h;
+  clearInterval(tick);
+  if (ui.tab === 'now' && status(ui.n) === 'active') tick = setInterval(updateClock, 30000);
+}
+const heroDeco = () => `${ico('spark', 'deco a')}${ico('spark', 'deco b')}${ico('spark', 'deco c')}`;
+
+function ringSvg(n) {
+  const C = 2 * Math.PI * 36, total = EXPS[n - 1].hours * 3600e3, left = Math.max(0, endsAt(n) - Date.now());
+  return `<svg class="ring" viewBox="0 0 84 84"><circle class="bg" cx="42" cy="42" r="36"/>
+    <circle class="fg" id="ringfg" cx="42" cy="42" r="36" stroke-dasharray="${C}" stroke-dashoffset="${C * (left / total)}"/>
+    <text x="42" y="42" id="ringtx">${Math.round((1 - left / total) * 100)}%</text></svg>`;
+}
+function updateClock() {
+  const n = ui.n; if (status(n) !== 'active') return;
+  const left = endsAt(n) - Date.now(), total = EXPS[n - 1].hours * 3600e3, C = 2 * Math.PI * 36;
+  const fg = document.getElementById('ringfg'), tx = document.getElementById('ringtx'), lt = document.getElementById('lefttx');
+  if (fg) fg.setAttribute('stroke-dashoffset', C * Math.max(0, left / total));
+  if (tx) tx.textContent = Math.min(100, Math.round((1 - Math.max(0, left) / total) * 100)) + '%';
+  if (lt) lt.textContent = fmtLeft(left);
+  if (left <= 0 && !document.querySelector('.timeup')) { const y = scrollY; render(); scrollTo(0, y); }
+}
+
+function viewNow() {
+  const n = ui.n, def = EXPS[n - 1], st = status(n), r = rec(n);
+  let h = `<div class="card hero">${heroDeco()}<div class="num">実験 ${n} ／ ${EXPS.length}</div>
+    <h2>${esc(def.t)}</h2><span class="principle">${esc(def.en)}</span>`;
+  if (st === 'active') {
+    const left = endsAt(n) - Date.now();
+    h += `<div class="ring-wrap">${ringSvg(n)}<div class="ring-msg"><b>実験中！</b><span id="lefttx">${fmtLeft(left)}</span></div></div>`;
+  } else if (st === 'done') {
+    h += `<div class="ring-wrap"><div class="ring-msg" style="text-align:center"><b>実験 完了</b>結果：${RES[r.result][0]}</div></div>`;
+  } else {
+    h += `<p class="lead">${esc(def.lead)}</p>`;
+  }
+  h += '</div>';
+  if (st !== 'todo') h += `<p class="deadline">${fmtDT(r.start)} にはじめて、<b>${fmtDT(new Date(endsAt(n)).toISOString())}</b> まで</p>`;
+  h += `<div class="card"><h3><span class="bubble p">${ico('spark')}</span>仮説<small style="font-family:M PLUS Rounded 1c,sans-serif;font-size:.75rem;color:var(--muted);font-weight:400">こうなると予想する</small></h3>
+    <dl class="theory"><dt>セオリー</dt><dd>${esc(def.theory)}</dd><dt>質問</dt><dd>${esc(def.q)}</dd></dl>
+    <p class="hyp">${esc(def.hyp)}</p></div>`;
+  h += `<div class="card"><h3><span class="bubble m">${ico('list')}</span>やり方</h3>
+    ${def.prep?.length ? `<div class="lbl" style="font-weight:700;font-size:.9rem">用意するもの</div><ul class="prep">${def.prep.map(x => `<li>${esc(x)}</li>`).join('')}</ul><div style="height:10px"></div>` : ''}
+    <ol class="steps">${def.steps.map(x => `<li>${esc(x)}</li>`).join('')}</ol>
+    <p class="note-small" style="margin:10px 0 0">期間：${durLabel(def.hours)}</p></div>`;
+  h += `<div class="card"><h3><span class="bubble r">${ico('heart')}</span>宣言</h3>
+    <p class="hint">${st === 'todo' ? '実験をはじめる時の宣言です。自分の言葉で書きかえてもかまいません。何も書かずにはじめると、下の例が入ります。' : 'この宣言で実験をはじめました。'}</p>
+    <textarea data-k="decl" placeholder="${esc(def.decl)}">${esc(r.data.decl)}</textarea>
+    ${st === 'todo' && !r.data.decl ? '<div class="btns" style="margin-top:10px"><button class="btn" data-act="decl-fill">例をそのまま使う</button></div>' : ''}</div>`;
+  if (def.f.length) h += `<div class="card"><h3><span class="bubble r">${ico('flask')}</span>実験の記録</h3>${def.f.map(field).join('')}</div>`;
+  if (st === 'todo') {
+    h += `<div class="card done-box"><p class="hint">準備ができたら、はじめましょう。ここから${durLabel(def.hours)}の実験がスタートします。</p>
+      <button class="btn main big wide" data-act="start">実験 ${n} をはじめる</button></div>`;
+  } else {
+    h += `<div class="card"><h3><span class="bubble p">${ico('eye')}</span>観察ノート</h3>
+      <p class="hint">気づいたこと、起きたことを、そのたびに書き留めます。時刻は自動で入ります。</p>
+      <div class="logbox"><input type="text" id="logInput" placeholder="例：駅で黄色い車を3台見た"><button class="btn main" data-act="log-add">書き留める</button></div>
+      ${r.log.length ? `<ul class="log-list">${r.log.map((x, i) => ({ x, i })).reverse().map(({ x, i }) =>
+        `<li><time>${fmtDT(x.at)}</time><span>${esc(x.t)}</span><button class="x" data-act="log-del" data-i="${i}" aria-label="消す">×</button></li>`).join('')}</ul>` : '<p class="note-small" style="margin:0">まだ何も書いていません。</p>'}</div>`;
+    const timeup = st === 'active' && endsAt(n) <= Date.now();
+    h += `<div class="card"><h3><span class="bubble m">${ico('check')}</span>結果</h3>
+      ${timeup ? `<p class="timeup">${durLabel(def.hours)}たちました。結果を記録しましょう</p>` : st === 'active' ? '<p class="hint">期限の前でも、結果がはっきりしたら記録して終えられます。</p>' : ''}
+      <div class="results">${Object.entries(RES).map(([k, [l, i]]) => `<button class="${k}" data-act="pick" data-v="${k}" aria-pressed="${(r.pick || r.result) === k}">${ico(i)}${l}</button>`).join('')}</div>
+      <div class="field"><span class="lbl">気づいたこと・感じたこと</span><textarea data-k="insight" placeholder="例：探そうと決めただけで、こんなに目に入るとは思わなかった">${esc(r.data.insight)}</textarea></div>
+      ${st === 'active' ? '<button class="btn main big wide" data-act="finish">実験を終える</button>' : '<div class="btns"><button class="btn ghost" data-act="reopen">結果を取り消して、実験中に戻す</button></div>'}</div>`;
+  }
+  h += `<div class="daynav"><button data-act="go" data-n="${n - 1}" ${n <= 1 ? 'disabled' : ''}>‹ 前の実験</button>
+    ${n !== currentN() ? `<button data-act="go" data-n="${currentN()}">今の実験へ</button>` : ''}
+    <button data-act="go" data-n="${n + 1}" ${n >= EXPS.length ? 'disabled' : ''}>次の実験 ›</button></div>`;
+  return h;
+}
+
+function chip(n) {
+  const st = status(n), r = S.exps[n];
+  if (st === 'todo') return '<span class="chip todo">まだ</span>';
+  if (st === 'active') return `<span class="chip active">${ico('clock')}実験中</span>`;
+  return `<span class="chip ${r.result}">${RES[r.result][0]}</span>`;
+}
+function viewList() {
+  const a = activeN();
+  return `<div class="card"><h3>9つの実験</h3><p class="hint">順番にやるのがおすすめですが、気になる実験から開くこともできます。${a ? `今は実験 ${a} が進行中です。` : ''}</p>
+    ${EXPS.map((d, i) => `<button class="exp-row ${status(i + 1) === 'done' ? 'done' : ''}" data-act="go" data-n="${i + 1}"><span class="num">${i + 1}</span>
+      <span class="tx"><b>${esc(d.t)}</b><small>${esc(d.lead)}（${durLabel(d.hours)}）</small></span>${chip(i + 1)}</button>`).join('')}</div>`;
+}
+
+function viewLog() {
+  const ns = EXPS.map((_, i) => i + 1).filter(n => status(n) !== 'todo');
+  let h = `<div class="card hero">${heroDeco()}<div class="num">実験レポート</div><h2>わたしの実験の記録</h2>
+    <p class="lead">終えた実験 ${doneCount()} ・ 起きた！ ${ns.filter(n => S.exps[n].result === 'yes').length}</p></div>`;
+  if (!ns.length) return h + '<div class="card"><p class="hint" style="margin:0">まだはじめた実験がありません。</p></div>';
+  h += '<div class="btns no-print" style="margin-bottom:16px"><button class="btn main" data-act="print">印刷する・PDFにする</button></div>';
+  for (const n of ns) {
+    const def = EXPS[n - 1], r = S.exps[n];
+    const rows = def.f.map(f => {
+      const v = r.data[f.key];
+      if (f.type === 'list' || f.type === 'days') { const a = Object.keys(v || {}).sort((x, y) => x - y).map(k => v[k]).filter(x => x?.trim?.()); return a.length ? [f.label, `<ul>${a.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`] : null; }
+      if (f.type === 'check') { const a = f.items.filter((_, i) => v?.[i]); return a.length ? [f.label || '準備', `<ul>${a.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`] : null; }
+      if (f.type === 'counter') return +v ? [f.label, `${+v}${f.unit}`] : null;
+      return v?.trim?.() ? [f.label, esc(v)] : null;
+    }).filter(Boolean);
+    h += `<div class="card rep"><div class="n-head"><span class="n-no">実験${n}</span><b>${esc(def.t)}</b><small>${fmtD(r.start)}〜${r.end ? fmtD(r.end) : ''}</small></div><dl>
+      <dt>法則</dt><dd>${esc(def.t)}（${esc(def.en)}）</dd>
+      <dt>セオリー</dt><dd>${esc(def.theory)}</dd>
+      <dt>質問</dt><dd>${esc(def.q)}</dd>
+      <dt>仮説</dt><dd>${esc(def.hyp)}</dd>
+      <dt>期間</dt><dd>${durLabel(def.hours)}（${fmtDT(r.start)} から）</dd>
+      ${r.data.decl?.trim() ? `<dt>宣言</dt><dd>${esc(r.data.decl)}</dd>` : ''}
+      ${rows.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${v}</dd>`).join('')}
+      ${r.log.length ? `<dt>観察</dt><dd><ul>${r.log.map(x => `<li>${fmtDT(x.at)}　${esc(x.t)}</li>`).join('')}</ul></dd>` : ''}
+      <dt>結果</dt><dd>${r.result ? RES[r.result][0] : '実験中'}</dd>
+      ${r.data.insight?.trim() ? `<dt>気づき</dt><dd>${esc(r.data.insight)}</dd>` : ''}</dl></div>`;
+  }
+  return h;
+}
+
+function optRow(act, opts, val) {
+  return `<div class="opt-row">${opts.map(([k, l]) => `<button class="btn" data-act="${act}" data-v="${k}" aria-pressed="${val === k}">${l}</button>`).join('')}</div>`;
+}
+function viewSet() {
+  return `<div class="card"><h3>文字の大きさ</h3>${optRow('size', [['m', 'ふつう'], ['l', '大きい'], ['xl', 'とても大きい']], curSize())}</div>
+    <div class="card"><h3>画面の色</h3>${optRow('theme', [['auto', '自動'], ['light', '明るい'], ['dark', '夜空']], S.theme)}</div>
+    <div class="card"><h3>バックアップ</h3><p class="hint">記録はこの機械（このブラウザ）の中だけに保存されています。ときどきファイルに書き出しておくと安心です。別の機械では「読みこむ」で続きから使えます。</p>
+    <div class="btns" style="justify-content:flex-start"><button class="btn main" data-act="export">ファイルに書き出す</button><button class="btn" data-act="import">ファイルから読みこむ</button></div></div>
+    <div class="card"><h3>最初からやり直す</h3><p class="hint">すべての実験の記録を消します。先にバックアップを取るのがおすすめです。</p>
+    <button class="btn danger" data-act="reset">すべての記録を消す</button></div>
+    <p class="note-small">各実験の内容は、本の要点を短くまとめたものです。くわしくは本で確かめてください。結果は人によってちがい、効果を約束するものではありません。</p>`;
+}
+
+// ---------- 演出 ----------
+function toast(msg) {
+  const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove('show'), 2400);
+}
+function confetti(n = 70) {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const colors = ['#7350d6', '#e8568f', '#f48a62', '#ffb3cf', '#b39cff', '#ffd2a8'];
+  for (let i = 0; i < n; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.background = colors[i % colors.length];
+    c.style.setProperty('--dx', (Math.random() - .5) * 200 + 'px');
+    c.style.setProperty('--rot', Math.random() * 1080 + 'deg');
+    c.style.animationDuration = 2 + Math.random() * 2 + 's';
+    c.style.animationDelay = Math.random() * .6 + 's';
+    if (i % 3 === 0) c.style.borderRadius = '50%';
+    document.body.appendChild(c); setTimeout(() => c.remove(), 5000);
+  }
+}
+function badge(n, result) {
+  const [c1, c2] = result === 'yes' ? ['#a55bd3', '#ec6a9f'] : result === 'some' ? ['#ffb36b', '#f06292'] : ['#7350d6', '#b39cff'];
+  return `<svg class="badge" viewBox="0 0 130 150" aria-hidden="true">
+    <defs><linearGradient id="bdg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs>
+    <path d="M44 84 L30 142 L50 130 L62 148 L66 86z" fill="#e8568f"/><path d="M86 84 L100 142 L80 130 L68 148 L64 86z" fill="#7350d6"/>
+    <circle cx="65" cy="62" r="50" fill="url(#bdg)"/><circle cx="65" cy="62" r="40" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="3 5" opacity=".8"/>
+    <g transform="translate(47 30) scale(1.5)" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${IC.flask}</g>
+    <text x="65" y="90" text-anchor="middle" fill="#fff" font-family="M PLUS Rounded 1c, sans-serif" font-size="13" font-weight="700">実験 ${n}</text>
+  </svg>`;
+}
+function party(n, result) {
+  const msg = { yes: '仮説どおりに起きました。ノートに残した観察が、あなたの証拠です。', some: '少しでも起きたなら、それも立派な結果です。次の実験でもっと確かめよう。', no: '起きなかったことも大事な結果です。気づいたことを書き残して、次の実験へ。' }[result];
+  const next = nextTodo();
+  const el = document.createElement('div');
+  el.className = 'party';
+  el.innerHTML = `<div class="box">${badge(n, result)}<h2>実験 ${n} 完了！</h2><p>${esc(msg)}</p>
+    <div class="bigstat"><div>終えた実験 <b>${doneCount()}</b> / ${EXPS.length}</div>${next ? `<div>次は「${esc(EXPS[next - 1].t)}」</div>` : '<div>9つの実験、すべて終わりました！</div>'}</div>
+    <button class="btn main big wide" data-close>やったね！</button></div>`;
+  el.addEventListener('click', e => { if (e.target === el || e.target.closest('[data-close]')) el.remove(); });
+  document.body.appendChild(el);
+  confetti(result === 'yes' ? 110 : 60);
+}
+
+// ---------- 操作 ----------
+const app = document.getElementById('app');
+app.addEventListener('input', e => {
+  const el = e.target; if (!el.dataset.k) return;
+  setP(rec(ui.n).data, el.dataset.k, el.type === 'checkbox' ? el.checked : el.value); save();
+});
+app.addEventListener('keydown', e => { if (e.target.id === 'logInput' && e.key === 'Enter' && !e.isComposing) { e.preventDefault(); addLog(); } });
+function addLog() {
+  const el = document.getElementById('logInput'), t = el?.value.trim(); if (!t) return;
+  rec(ui.n).log.push({ at: new Date().toISOString(), t }); save();
+  const y = scrollY; render(); scrollTo(0, y); toast('書き留めました');
+  document.getElementById('logInput')?.focus({ preventScroll: true });
+}
+app.addEventListener('click', e => {
+  const el = e.target.closest('[data-act]'); if (!el) return;
+  const act = el.dataset.act, n = ui.n, r = rec(n);
+  const keep = () => { const y = scrollY; render(); scrollTo(0, y); };
+  switch (act) {
+    case 'tab': ui.tab = el.dataset.tab; if (ui.tab === 'now') ui.n = currentN(); render(); scrollTo(0, 0); break;
+    case 'go': ui.n = Math.min(EXPS.length, Math.max(1, +el.dataset.n)); ui.tab = 'now'; render(); scrollTo(0, 0); break;
+    case 'start': {
+      const a = activeN();
+      if (a && a !== n && !confirm(`実験 ${a} がまだ実験中です。同時に進めますか？`)) break;
+      if (!r.data.decl?.trim()) r.data.decl = EXPS[n - 1].decl;
+      r.start = new Date().toISOString(); save(); render(); scrollTo(0, 0); confetti(40); toast(`実験 ${n} スタート！`);
+      navigator.storage?.persist?.().catch(() => {});
+      break;
+    }
+    case 'decl-fill': r.data.decl = EXPS[n - 1].decl; save(); keep(); break;
+    case 'log-add': addLog(); break;
+    case 'log-del': if (confirm('この観察を消しますか？')) { r.log.splice(+el.dataset.i, 1); save(); keep(); } break;
+    case 'count': { r.data[el.dataset.k] = Math.max(0, (+r.data[el.dataset.k] || 0) + +el.dataset.d); save(); keep(); break; }
+    case 'pick': if (status(n) === 'done') r.result = el.dataset.v; else r.pick = el.dataset.v; save(); keep(); break;
+    case 'finish':
+      if (!r.pick) { toast('起きた・少し起きた・起きなかった から、1つ選んでください'); break; }
+      r.result = r.pick; r.end = new Date().toISOString(); delete r.pick; save(); render(); scrollTo(0, 0); party(n, r.result);
+      break;
+    case 'reopen': r.pick = r.result; delete r.result; delete r.end; save(); keep(); break;
+    case 'print': window.print(); break;
+    case 'theme': S.theme = el.dataset.v; save(); render(); break;
+    case 'size': S.size = el.dataset.v; save(); render(); break;
+    case 'export': {
+      const blob = new Blob([JSON.stringify(S, null, 2)], { type: 'application/json' }), a = document.createElement('a');
+      a.href = URL.createObjectURL(blob); a.download = `実験ノート記録-${today()}.json`; a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+      break;
+    }
+    case 'import': document.getElementById('importFile').click(); break;
+    case 'reset':
+      if (confirm('すべての実験の記録を消します。よろしいですか？') && confirm('本当に消しますか？元に戻せません。')) { S = fresh(); save(); ui = { tab: 'now', n: null }; render(); }
+      break;
+  }
+});
+document.getElementById('importFile').addEventListener('change', async e => {
+  const file = e.target.files[0]; if (!file) return;
+  try {
+    const data = JSON.parse(await file.text());
+    if (!data || typeof data.exps !== 'object') throw new Error();
+    if (!confirm('今の記録を、このファイルの内容で置きかえます。よろしいですか？')) return;
+    S = Object.assign(fresh(), data); save(); ui = { tab: 'now', n: null }; render(); toast('読みこみました');
+  } catch (err) { toast('このファイルは読みこめませんでした'); }
+  e.target.value = '';
+});
+document.addEventListener('visibilitychange', () => { if (!document.hidden) updateClock(); });
+
+render();
+
+// 新しい版をあげた時、古いページが残っていても自動で読み直す（あげ直すたびに VERSION を変える）
+const VERSION = '2026-10-29.1';
+fetch(location.pathname + '?t=' + Date.now(), { cache: 'no-store' }).then(r => r.text()).then(t => {
+  const v = t.match(/const VERSION = '([^']+)'/)?.[1];
+  let done = null; try { done = sessionStorage.getItem('reloadedFor'); } catch (e) {}
+  if (v && v !== VERSION && done !== v) { try { sessionStorage.setItem('reloadedFor', v); } catch (e) {} location.replace(location.pathname + '?v=' + v); }
+}).catch(() => {});
+</script>
+</body>
+</html>
