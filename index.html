@@ -71,7 +71,7 @@ a.tool .go { font-size: 1.5rem; }
 </div>
 <script>
 // 新しい版をあげた時、スマホに古いページが残っていても自動で読み直す（あげ直すたびに VERSION を変える）
-const VERSION = '2026-10-29.5';
+const VERSION = '2026-10-29.6';
 fetch(location.pathname + '?t=' + Date.now(), { cache: 'no-store' }).then(r => r.text()).then(t => {
   const v = t.match(/const VERSION = '([^']+)'/)?.[1];
   let done = null; try { done = sessionStorage.getItem('reloadedFor'); } catch (e) {}
