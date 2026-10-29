@@ -5,35 +5,39 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="ザ・マジック">
-<meta name="theme-color" content="#f5f0e6">
+<meta name="theme-color" content="#a55bd3">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ザ・マジック</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Klee+One:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --paper: #f5f0e6;
-  --sheet: #fffdf8;
-  --ink: #2a2622;
-  --sub: #6b6358;
-  --rule: #d6ccba;
-  --rule-soft: #e8e0d1;
-  --shu: #b8392a;
-  --shu-soft: #f5e2dd;
-  --ai: #2d4a78;
-  --mark: #fff1bd;
-  --on-ink: #fffdf8;
+  --bg: #fdf6fa;
+  --card: #ffffff;
+  --ink: #2e2442;
+  --muted: #74688a;
+  --line: #efe2ee;
+  --field: #fffafd;
+  --purple: #7350d6;
+  --pink: #e8568f;
+  --peach: #f48a62;
+  --lav: #f0eaff;
+  --pink-soft: #ffe7f0;
+  --peach-soft: #fff0e7;
+  --shadow: 0 2px 0 rgba(115,80,214,.06), 0 8px 24px rgba(115,80,214,.08);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #1c1a17; --sheet: #24211d; --ink: #ece5d7; --sub: #a99f90; --rule: #4b453c; --rule-soft: #35302a;
-    --shu: #e06a55; --shu-soft: #3c2520; --ai: #9fb7e0; --mark: #4a4128; --on-ink: #1c1a17;
+    --bg: #1a1426; --card: #251c36; --ink: #f4eefb; --muted: #bbb0d2; --line: #3b2f53; --field: #1f182e;
+    --purple: #b39cff; --pink: #ff8fbd; --peach: #ffb093; --lav: #30264a; --pink-soft: #3d2338; --peach-soft: #3a2a27;
+    --shadow: 0 2px 0 rgba(0,0,0,.2), 0 8px 24px rgba(0,0,0,.25);
   }
 }
 :root[data-theme="dark"] {
-  --paper: #1c1a17; --sheet: #24211d; --ink: #ece5d7; --sub: #a99f90; --rule: #4b453c; --rule-soft: #35302a;
-  --shu: #e06a55; --shu-soft: #3c2520; --ai: #9fb7e0; --mark: #4a4128; --on-ink: #1c1a17;
+  --bg: #1a1426; --card: #251c36; --ink: #f4eefb; --muted: #bbb0d2; --line: #3b2f53; --field: #1f182e;
+  --purple: #b39cff; --pink: #ff8fbd; --peach: #ffb093; --lav: #30264a; --pink-soft: #3d2338; --peach-soft: #3a2a27;
+  --shadow: 0 2px 0 rgba(0,0,0,.2), 0 8px 24px rgba(0,0,0,.25);
 }
 /* 文字の大きさ（設定で切りかえ） */
 html { font-size: 18px; }
@@ -43,228 +47,258 @@ html[data-size="xl"] { font-size: 22px; }
 * { box-sizing: border-box; }
 html, body { margin: 0; }
 body {
-  background: var(--paper);
+  background: var(--bg);
   color: var(--ink);
-  font-family: "BIZ UDPGothic", "Hiragino Sans", "Yu Gothic", sans-serif;
+  font-family: "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", "Hiragino Sans", sans-serif;
   font-size: 1rem;
   line-height: 1.8;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
 }
-.hand { font-family: "Klee One", "Hiragino Mincho ProN", serif; }
-.wrap { max-width: 720px; margin: 0 auto; padding: 8px 16px calc(96px + env(safe-area-inset-bottom)); }
-h1, h2, h3 { font-family: "Klee One", "Hiragino Mincho ProN", serif; font-weight: 600; line-height: 1.45; margin: 0; }
+.wrap { max-width: 760px; margin: 0 auto; padding: 12px 16px calc(110px + env(safe-area-inset-bottom)); }
+h1, h2, h3 { font-family: "Kiwi Maru", "Hiragino Maru Gothic ProN", serif; font-weight: 500; line-height: 1.45; margin: 0; }
 button { font: inherit; color: inherit; cursor: pointer; }
-a { color: var(--ai); }
-
-/* 入力欄：罫線のノート */
-input[type="text"], textarea {
-  font-family: "Klee One", "Hiragino Mincho ProN", serif; font-size: max(16px, 1.05rem); color: var(--ink);
-  background: transparent; border: 0; border-bottom: 1.5px solid var(--rule); border-radius: 0;
-  padding: 8px 4px 6px; width: 100%; min-height: 3rem; -webkit-appearance: none; appearance: none;
+svg.ico { width: 1.4em; height: 1.4em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+input, textarea {
+  font: inherit; font-size: max(16px, 1rem); color: var(--ink); background: var(--field);
+  border: 1.5px solid var(--line); border-radius: 14px; padding: 10px 14px; width: 100%; min-height: 3rem;
 }
-textarea {
-  min-height: 7.2rem; resize: vertical; line-height: 2.4rem; padding: 0 4px; border: 0;
-  background-image: repeating-linear-gradient(transparent 0, transparent calc(2.4rem - 1.5px), var(--rule) calc(2.4rem - 1.5px), var(--rule) 2.4rem);
-  background-attachment: local;
-}
-input::placeholder, textarea::placeholder { color: var(--sub); opacity: .6; font-family: "BIZ UDPGothic", sans-serif; font-size: .9em; }
-input[type="text"]:focus, textarea:focus { outline: none; background-color: var(--mark); border-bottom-color: var(--ink); }
+input::placeholder, textarea::placeholder { color: var(--muted); opacity: .7; }
+input:focus, textarea:focus { outline: 3px solid var(--pink-soft); border-color: var(--pink); }
+textarea { min-height: 6rem; resize: vertical; }
 
-/* 上の見出し */
-header.top { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; padding: 12px 0 10px; border-bottom: 2px solid var(--ink); margin-bottom: 4px; }
-header.top .title { font-family: "Klee One", serif; font-weight: 600; font-size: 1.35rem; line-height: 1.2; }
-header.top .sub { display: block; font-size: .7rem; color: var(--sub); margin-top: 2px; }
-header.top .count { font-size: .75rem; color: var(--sub); white-space: nowrap; text-align: right; }
-header.top .count b { font-family: "Klee One", serif; font-size: 1.25rem; color: var(--shu); margin: 0 2px; }
+header.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 4px 0 12px; }
+header.top h1 { font-size: 1.3rem; display: flex; align-items: center; gap: 6px; }
+header.top h1 .ico { color: var(--pink); width: 1.1em; height: 1.1em; fill: var(--pink-soft); }
+header.top h1 small { display: block; font-family: "M PLUS Rounded 1c", sans-serif; font-size: .68rem; color: var(--muted); font-weight: 400; }
+.total { text-align: right; font-size: .7rem; color: var(--muted); white-space: nowrap; }
+.total b { display: block; font-family: "Kiwi Maru", serif; font-size: 1.35rem; color: var(--pink); line-height: 1.2; font-weight: 500; }
 
-/* タブ：スマホは画面の下、PCは見出しの下 */
+/* タブ：スマホは画面の下、PCは上 */
 nav.tabs {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
-  display: flex; background: var(--sheet); border-top: 1px solid var(--rule);
-  padding: 0 0 env(safe-area-inset-bottom);
+  display: flex; background: var(--card); border-top: 1px solid var(--line);
+  padding: 4px 4px calc(4px + env(safe-area-inset-bottom)); box-shadow: 0 -4px 16px rgba(115,80,214,.06);
 }
 nav.tabs button {
-  flex: 1; border: 0; background: transparent; color: var(--sub); min-height: 60px; padding: 0 2px;
-  font-size: .85rem; font-weight: 700; border-top: 3px solid transparent;
+  flex: 1; border: 0; background: transparent; border-radius: 14px; color: var(--muted);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  min-height: 60px; padding: 4px 2px; font-size: .72rem; line-height: 1.3;
 }
-nav.tabs button[aria-current="true"] { color: var(--ink); border-top-color: var(--shu); }
+nav.tabs button .ico { width: 1.5rem; height: 1.5rem; }
+nav.tabs button[aria-current="true"] { background: var(--pink-soft); color: var(--pink); font-weight: 700; }
 @media (min-width: 768px) {
   .wrap { padding-bottom: 48px; }
-  nav.tabs { position: static; background: transparent; border-top: 0; border-bottom: 1px solid var(--rule); margin-bottom: 20px; padding: 0; gap: 4px; justify-content: flex-start; }
-  nav.tabs button { flex: none; min-height: 48px; padding: 0 18px; font-size: .9rem; border-top: 0; border-bottom: 3px solid transparent; }
-  nav.tabs button[aria-current="true"] { border-bottom-color: var(--shu); }
+  nav.tabs { position: sticky; top: 8px; bottom: auto; border: 1px solid var(--line); border-radius: 18px; margin-bottom: 16px; box-shadow: var(--shadow); padding: 4px; gap: 4px; }
+  nav.tabs button { flex-direction: row; gap: 6px; min-height: 44px; font-size: .9rem; }
+  nav.tabs button .ico { width: 1.15rem; height: 1.15rem; }
 }
 
-/* 紙 */
-.sheet { background: var(--sheet); border: 1px solid var(--rule-soft); border-radius: 4px; padding: 20px; margin-bottom: 16px; }
-.sheet > h3 { font-size: 1.15rem; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
-.hint { color: var(--sub); font-size: .9rem; margin: 0 0 14px; }
-.aside { font-size: .85rem; color: var(--sub); border-left: 3px solid var(--rule); padding: 2px 0 2px 12px; margin: 0 0 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 20px; margin-bottom: 16px; box-shadow: var(--shadow); }
+.card h3 { font-size: 1.15rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.hint { color: var(--muted); font-size: .9rem; margin: 0 0 12px; }
+.bubble { width: 2.4rem; height: 2.4rem; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.bubble .ico { width: 1.35rem; height: 1.35rem; }
+.bubble.m { background: var(--peach-soft); color: var(--peach); }
+.bubble.p { background: var(--pink-soft); color: var(--pink); }
+.bubble.r { background: var(--lav); color: var(--purple); }
+.voice { display: flex; gap: 8px; align-items: flex-start; font-size: .85rem; background: var(--lav); color: var(--purple); border-radius: 14px; padding: 8px 12px; margin: 0 0 14px; }
+.voice .ico { margin-top: .2em; width: 1.2em; height: 1.2em; }
 
-/* 今日の見出し */
-.dayhead { padding: 22px 2px 18px; }
-.dayhead .dno { font-size: .85rem; color: var(--sub); }
-.dayhead .dno b { font-family: "Klee One", serif; font-size: 1.6rem; color: var(--shu); margin-right: 2px; }
-.dayhead h2 { font-size: 1.75rem; margin: 2px 0 6px; }
-.dayhead .lead { margin: 0; }
-.dayhead .phase { font-size: .8rem; color: var(--sub); margin: 8px 0 0; }
-.meta { display: flex; gap: 18px; font-size: .85rem; color: var(--sub); padding: 0 2px 14px; }
-.meta b { color: var(--ink); font-family: "Klee One", serif; font-size: 1.05rem; }
-
-/* 判子 */
-.seal {
-  width: 2.8rem; height: 2.8rem; flex: none; border-radius: 50%;
-  display: inline-flex; align-items: center; justify-content: center;
-  font-family: "Klee One", serif; font-weight: 600; font-size: 1.15rem; line-height: 1;
-  border: 1.5px dashed var(--rule); color: var(--sub);
+/* いろどりの見出し */
+.hero {
+  position: relative; overflow: hidden; text-align: center; color: #fff; border: 0;
+  background: linear-gradient(140deg, #6a4fd8 0%, #a55bd3 40%, #ec6a9f 75%, #f99a74 100%);
+  padding: 26px 18px 22px; box-shadow: 0 10px 28px rgba(165,91,211,.25);
 }
-.seal.on { border: 2.5px solid var(--shu); color: var(--shu); background: var(--shu-soft); transform: rotate(-8deg); }
+.hero::before, .hero::after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; }
+.hero::before { width: 220px; height: 220px; right: -70px; top: -90px; background: radial-gradient(circle, rgba(255,255,255,.28), rgba(255,255,255,0) 70%); }
+.hero::after { width: 180px; height: 180px; left: -60px; bottom: -80px; background: radial-gradient(circle, rgba(255,214,190,.45), rgba(255,214,190,0) 70%); }
+.hero > * { position: relative; z-index: 1; }
+.hero .deco { position: absolute; z-index: 0; color: rgba(255,255,255,.55); fill: rgba(255,255,255,.25); stroke-width: 1.4; }
+.hero .deco.a { width: 26px; height: 26px; left: 18px; top: 16px; animation: twinkle 3.2s ease-in-out infinite; }
+.hero .deco.b { width: 16px; height: 16px; right: 28px; top: 54px; animation: twinkle 2.6s ease-in-out .6s infinite; }
+.hero .deco.c { width: 20px; height: 20px; right: 46%; bottom: 14px; animation: twinkle 3.6s ease-in-out 1.2s infinite; }
+@keyframes twinkle { 50% { opacity: .35; transform: scale(.8) rotate(12deg); } }
+.hero .num { color: #fff3e8; font-size: .85rem; letter-spacing: .08em; font-weight: 700; }
+.hero h2 { font-size: 1.7rem; margin: 4px 0 4px; }
+.hero .lead { margin: 6px 0 0; color: rgba(255,255,255,.95); }
+.hero .phase { display: inline-block; margin-top: 12px; font-size: .75rem; color: #fff; background: rgba(255,255,255,.18); border-radius: 999px; padding: 2px 12px; }
+.ring-wrap { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 16px; }
+.ring { width: 84px; height: 84px; flex: none; }
+.ring circle { fill: none; stroke-width: 9; }
+.ring .bg { stroke: rgba(255,255,255,.25); }
+.ring .fg { stroke: #fff; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 50% 50%; transition: stroke-dashoffset .8s cubic-bezier(.3,1.4,.5,1); }
+.ring text { fill: #fff; font-size: 21px; text-anchor: middle; dominant-baseline: central; font-family: "Kiwi Maru", serif; }
+.ring-msg { text-align: left; font-size: .9rem; line-height: 1.5; color: #fff; }
+.ring-msg b { display: block; font-size: 1.05rem; font-family: "Kiwi Maru", serif; font-weight: 500; }
 
-/* 今日やること */
-.tasks { border-top: 1px solid var(--rule); margin-bottom: 20px; }
-.task {
-  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 14px; width: 100%; text-align: left;
-  background: transparent; border: 0; border-bottom: 1px solid var(--rule); padding: 14px 4px; min-height: 5rem;
+.streak { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+.streak span { display: inline-flex; align-items: center; gap: 6px; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 4px 14px; font-size: .85rem; box-shadow: var(--shadow); }
+.streak .ico { width: 1.1em; height: 1.1em; color: var(--pink); }
+.streak b { color: var(--purple); font-size: 1.05rem; font-family: "Kiwi Maru", serif; font-weight: 500; }
+
+.sec-title { font-size: 1.05rem; margin: 4px 4px 10px; color: var(--muted); }
+.secs { display: grid; gap: 12px; margin-bottom: 16px; }
+.sec-btn {
+  display: grid; grid-template-columns: 3.2rem 1fr auto; align-items: center; gap: 12px; text-align: left;
+  width: 100%; min-height: 5rem; padding: 14px 16px; border-radius: 22px;
+  background: var(--card); border: 2px solid var(--line); box-shadow: var(--shadow); transition: transform .1s;
 }
-.task:active { background: var(--rule-soft); }
-.task .tx b { display: block; font-size: 1.1rem; }
-.task .tx small { display: block; font-size: .85rem; color: var(--sub); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.task .tx { min-width: 0; }
-.task .go { font-size: .9rem; color: var(--ai); font-weight: 700; white-space: nowrap; }
-.task.done .go { color: var(--shu); }
+.sec-btn:active { transform: scale(.98); }
+.sec-btn .ic { width: 3.2rem; height: 3.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.sec-btn .ic .ico { width: 1.7rem; height: 1.7rem; }
+.sec-btn .ic.m { background: var(--peach-soft); color: var(--peach); }
+.sec-btn .ic.p { background: var(--pink-soft); color: var(--pink); }
+.sec-btn .ic.r { background: var(--lav); color: var(--purple); }
+.sec-btn .tx { min-width: 0; }
+.sec-btn .tx b { display: block; font-size: 1.1rem; font-family: "Kiwi Maru", serif; font-weight: 500; }
+.sec-btn .tx small { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: var(--muted); font-size: .85rem; overflow: hidden; line-height: 1.5; }
+.sec-btn .st { display: inline-flex; align-items: center; gap: 4px; font-size: .85rem; font-weight: 700; color: var(--purple); background: var(--lav); border-radius: 999px; padding: 4px 12px; white-space: nowrap; }
+.sec-btn .st .ico { width: 1em; height: 1em; stroke-width: 2.6; }
+.sec-btn.ok { border-color: var(--pink); }
+.sec-btn.ok .st { background: var(--pink); color: #fff; }
+.sec-btn:not(.ok) .ic .ico { animation: bob 2.8s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(-3px) rotate(-6deg); } }
 
-.back { border: 0; background: transparent; color: var(--ai); font-weight: 700; padding: 14px 0; min-height: 48px; font-size: 1rem; }
+.back { display: inline-flex; align-items: center; gap: 4px; border: 0; background: transparent; color: var(--purple); font-weight: 700; padding: 8px 4px 12px; min-height: 48px; font-size: 1rem; }
 
 .daynav { display: flex; justify-content: space-between; gap: 8px; margin: 8px 0 16px; }
-.daynav button { border: 0; background: transparent; color: var(--ai); min-height: 44px; padding: 0 4px; font-size: .9rem; }
-.daynav button:disabled { color: var(--rule); cursor: default; }
+.daynav button { border: 1px solid var(--line); background: var(--card); border-radius: 999px; padding: 6px 16px; min-height: 44px; font-size: .85rem; color: var(--muted); }
+.daynav button:disabled { opacity: .35; cursor: default; }
 
-.howto-steps { margin: 0; padding-left: 1.5em; }
-.howto-steps li { margin-bottom: 6px; }
-.howto-steps li::marker { font-family: "Klee One", serif; color: var(--shu); font-weight: 600; }
+ol.steps { margin: 0; padding-left: 1.5em; }
+ol.steps li { margin-bottom: 6px; }
+ol.steps li::marker { color: var(--pink); font-family: "Kiwi Maru", serif; }
 
-/* 書く行 */
-.row { display: grid; grid-template-columns: 1.8rem 1fr auto; gap: 6px 12px; align-items: start; margin-bottom: 18px; }
-.row .no { font-family: "Klee One", serif; color: var(--shu); font-weight: 600; text-align: right; padding-top: 12px; font-size: 1.1rem; }
-.row.solo { align-items: end; }
-.row .fields { display: grid; gap: 0; min-width: 0; }
-.row .fields input.why { font-size: max(16px, .92rem); min-height: 2.6rem; color: var(--sub); }
-.row.solo { grid-template-columns: 1fr auto; }
+.row { display: grid; grid-template-columns: 1.8rem 1fr auto; gap: 8px 10px; align-items: start; margin-bottom: 16px; }
+.row .no {
+  width: 1.8rem; height: 1.8rem; margin-top: .6rem; border-radius: 50%; background: var(--pink-soft); color: var(--pink);
+  display: flex; align-items: center; justify-content: center; font-family: "Kiwi Maru", serif; font-size: .9rem;
+}
+.row .fields { display: grid; gap: 6px; min-width: 0; }
+.row .fields input.why { font-size: max(16px, .9rem); min-height: 2.6rem; }
+.row.solo { grid-template-columns: 1fr auto; align-items: center; }
 
 .thx {
-  border: 1.5px solid var(--ink); background: var(--sheet); color: var(--ink); font-weight: 700;
-  border-radius: 6px; padding: 6px 14px; min-height: 3rem; white-space: nowrap; min-width: 9.5rem;
-  display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-size: .95rem;
+  border: 2px solid var(--pink); background: var(--card); color: var(--pink); font-weight: 700;
+  border-radius: 999px; padding: 6px 16px; min-height: 3rem; white-space: nowrap; min-width: 9.5rem;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-size: .95rem; transition: transform .1s;
 }
-.thx:active { transform: translateY(1px); }
+.thx:active { transform: scale(.96); }
 .thx .dots { display: inline-flex; gap: 4px; }
-.thx .dots i { width: .7rem; height: .7rem; border-radius: 50%; border: 1.5px solid var(--sub); }
-.thx .dots i.on { background: var(--shu); border-color: var(--shu); }
-.thx.full { border-color: var(--shu); color: var(--shu); background: var(--shu-soft); }
+.thx .dots i { width: .75rem; height: .75rem; border-radius: 50%; border: 2px solid var(--pink); }
+.thx .dots i.on { background: var(--pink); }
+.thx.full { background: linear-gradient(135deg, #7350d6, #e8568f); color: #fff; border-color: transparent; animation: pop .45s ease-out; }
+.thx.full .dots i { border-color: #fff; background: #fff; }
+@keyframes pop { 40% { transform: scale(1.08); } }
 
-.person { border-top: 1px solid var(--rule-soft); padding-top: 18px; margin-top: 18px; }
+.person { border-top: 1.5px dashed var(--line); padding-top: 16px; margin-top: 16px; }
 .person:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
-.person .pname { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: end; margin-bottom: 8px; }
-.person .pname input { font-weight: 600; }
+.person .pname { display: grid; grid-template-columns: 1fr auto; gap: 8px; margin-bottom: 10px; }
+.person .pname input { font-weight: 700; }
 
 label.chk { display: flex; gap: 12px; align-items: center; padding: 8px 0; min-height: 48px; cursor: pointer; }
-label.chk input { width: 26px; height: 26px; accent-color: var(--shu); flex: none; margin: 0; }
-.field { margin-bottom: 20px; }
-.field > .lbl { display: block; font-size: .95rem; font-weight: 700; margin-bottom: 2px; }
+label.chk input { width: 28px; height: 28px; min-height: 0; accent-color: var(--pink); flex: none; }
+.field { margin-bottom: 18px; }
+.field > .lbl { display: block; font-size: .95rem; font-weight: 700; margin-bottom: 6px; }
 
 .counter { text-align: center; }
-.counter .big { font-family: "Klee One", serif; font-size: 3rem; line-height: 1.2; }
-.counter .big small { font-size: 1rem; color: var(--sub); }
-.bar { height: 6px; background: var(--rule-soft); overflow: hidden; margin: 10px 0 16px; }
-.bar > i { display: block; height: 100%; background: var(--shu); transition: width .3s; }
+.counter .big { font-family: "Kiwi Maru", serif; font-size: 3rem; color: var(--pink); line-height: 1.15; }
+.counter .big small { font-size: 1rem; color: var(--muted); }
+.bar { height: 12px; background: var(--pink-soft); border-radius: 999px; overflow: hidden; margin: 10px 0 14px; }
+.bar > i { display: block; height: 100%; background: linear-gradient(90deg, #7350d6, #e8568f, #f48a62); border-radius: 999px; transition: width .3s; }
 .btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-.btn { border: 1.5px solid var(--ink); background: var(--sheet); border-radius: 6px; padding: 10px 18px; min-height: 3rem; font-size: .95rem; font-weight: 700; }
-.btn.ink { background: var(--ink); border-color: var(--ink); color: var(--on-ink); }
-.btn.big { padding: 14px 26px; font-size: 1.1rem; min-height: 3.6rem; }
+.btn { border: 1.5px solid var(--line); background: var(--card); border-radius: 999px; padding: 10px 20px; min-height: 3rem; font-size: .95rem; }
+.btn.main { background: linear-gradient(135deg, #7350d6, #e8568f); border-color: transparent; color: #fff; font-weight: 700; box-shadow: 0 6px 16px rgba(232,86,143,.25); }
+.btn.big { padding: 14px 28px; font-size: 1.1rem; min-height: 3.6rem; }
 .btn.wide { width: 100%; max-width: 480px; }
-.btn.plain { border-color: var(--rule); font-weight: 400; }
-.btn.danger { color: var(--shu); border-color: var(--shu); }
-.link { border: 0; background: transparent; color: var(--ai); text-decoration: underline; padding: 8px; min-height: 44px; font-size: .9rem; }
+.btn.ghost { background: transparent; }
+.btn.danger { color: #c63b4f; border-color: #f0b6c0; }
 
 .breath { text-align: center; }
-.orb { width: 132px; height: 132px; margin: 8px auto 12px; border-radius: 50%; border: 2px solid var(--ai); background: transparent;
-  transform: scale(.55); transition: transform 4s ease-in-out; }
-.orb.in { transform: scale(1); background: rgba(45,74,120,.08); }
+.orb { width: 140px; height: 140px; margin: 8px auto 12px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffe3ee, #e8568f 60%, #7350d6);
+  transform: scale(.55); transition: transform 4s ease-in-out; opacity: .9; }
+.orb.in { transform: scale(1); }
 .breath .say { min-height: 1.8em; font-weight: 700; font-size: 1.1rem; }
 
-/* 終える */
-.finish { text-align: center; padding: 8px 0 4px; }
-.finish .note { font-size: .8rem; color: var(--sub); margin: 8px 0 0; }
-.finished { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 8px 0; }
-.finished .seal { width: 4rem; height: 4rem; font-size: 1.5rem; }
-.finished p { margin: 0; text-align: left; }
+.done-box { text-align: center; }
+.done-box .stamp { font-family: "Kiwi Maru", serif; font-size: 1.2rem; color: var(--pink); margin-bottom: 6px; display: flex; align-items: center; justify-content: center; gap: 8px; }
 
-.word { font-family: "Klee One", serif; border-left: 3px solid var(--shu); padding: 4px 0 4px 14px; margin: 20px 2px; font-size: 1.05rem; }
-.word small { display: block; font-family: "BIZ UDPGothic", sans-serif; font-size: .72rem; color: var(--sub); }
+.word { text-align: center; font-family: "Kiwi Maru", serif; font-size: 1.05rem; padding: 16px 18px; background: linear-gradient(135deg, var(--lav), var(--pink-soft)); border: 0; }
+.word small { display: block; font-family: "M PLUS Rounded 1c", sans-serif; font-size: .72rem; color: var(--purple); font-weight: 700; margin-bottom: 2px; }
 
-/* 28日の表 */
-.weeks { display: grid; gap: 10px; }
-.wk { display: grid; grid-template-columns: 3.4rem 1fr; align-items: center; gap: 8px; }
-.wk .wl { font-size: .75rem; color: var(--sub); }
-.cells { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
-.cell {
-  aspect-ratio: 1; border: 1px solid var(--rule); background: var(--sheet); border-radius: 2px; min-width: 0; padding: 0;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  font-family: "Klee One", serif; font-size: 1.05rem; line-height: 1.1; position: relative;
+.journey { height: 14px; background: var(--pink-soft); border-radius: 999px; overflow: hidden; margin: 8px 0 4px; }
+.journey > i { display: block; height: 100%; background: linear-gradient(90deg, #7350d6, #e8568f, #f48a62); border-radius: 999px; transition: width .8s; }
+.map { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.map button {
+  aspect-ratio: 1; border: 1.5px solid var(--line); background: var(--card); border-radius: 14px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2px;
+  font-family: "Kiwi Maru", serif; font-size: 1.1rem; min-width: 0; line-height: 1.2;
 }
-.cell small { font-family: "BIZ UDPGothic", sans-serif; font-size: .55rem; color: var(--sub); }
-.cell.on::before {
-  content: ""; position: absolute; inset: 12%; border-radius: 50%; border: 2px solid var(--shu); transform: rotate(-8deg);
-}
-.cell.on { color: var(--shu); }
-.cell.cur { border: 2px solid var(--ink); }
-.cell:disabled { color: var(--rule); cursor: default; }
-.legend { font-size: .75rem; color: var(--sub); margin: 12px 0 0; }
-.phase-h { font-size: .85rem; color: var(--sub); font-weight: 700; margin: 18px 0 2px; padding-bottom: 4px; border-bottom: 1px solid var(--rule); }
-.phase-h:first-of-type { margin-top: 4px; }
+.map button small { font-family: "M PLUS Rounded 1c", sans-serif; font-size: .58rem; color: var(--muted); }
+.map button .ico { width: .9rem; height: .9rem; }
+.map button.done { background: linear-gradient(140deg, #7350d6, #e8568f); border-color: transparent; color: #fff; }
+.map button.done small { color: #fff; opacity: .9; }
+.map button.cur { border: 2.5px solid var(--pink); animation: glow 1.8s ease-in-out infinite alternate; }
+@keyframes glow { from { box-shadow: 0 0 0 0 rgba(232,86,143,0); } to { box-shadow: 0 0 0 5px rgba(232,86,143,.2); } }
+.map button.mile:not(.done) { border-style: dashed; border-color: var(--peach); color: var(--peach); }
+.phase-lbl { font-size: .85rem; color: var(--purple); margin: 16px 0 6px; font-weight: 700; }
+.phase-lbl:first-of-type { margin-top: 8px; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: .75rem; color: var(--muted); margin-top: 12px; }
 
-.log-item { display: grid; grid-template-columns: 4.4rem 1fr; gap: 12px; padding: 12px 2px; border-bottom: 1px solid var(--rule-soft); cursor: pointer; min-height: 48px; }
-.log-item .d { font-family: "Klee One", serif; font-weight: 600; }
-.log-item .d small { display: block; font-family: "BIZ UDPGothic", sans-serif; font-weight: 400; color: var(--sub); font-size: .72rem; }
-.log-item .best { font-family: "Klee One", serif; font-size: .9rem; color: var(--sub); }
-.log-item.off { opacity: .45; pointer-events: none; }
+.log-item { display: grid; grid-template-columns: 4.2rem 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); cursor: pointer; min-height: 48px; }
+.log-item:first-of-type { border-top: 0; }
+.log-item .d { font-family: "Kiwi Maru", serif; color: var(--pink); }
+.log-item .d small { display: block; font-family: "M PLUS Rounded 1c", sans-serif; color: var(--muted); font-size: .7rem; }
+.log-item .best { font-size: .85rem; color: var(--muted); }
 
-.intro h2 { font-size: 1.6rem; margin: 20px 0 8px; }
 .intro p { margin: 0 0 12px; }
-.daily { list-style: none; padding: 0; margin: 0 0 18px; border-top: 1px solid var(--rule); }
-.daily li { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: center; padding: 12px 2px; border-bottom: 1px solid var(--rule); }
-.small { font-size: .78rem; color: var(--sub); }
-.wish-cat { margin-bottom: 18px; }
-.wish-cat .lbl { font-weight: 700; font-size: .95rem; }
+.three { list-style: none; padding: 0; margin: 0 0 14px; display: grid; gap: 8px; }
+.three li { display: grid; grid-template-columns: 2.6rem 1fr; gap: 10px; align-items: center; background: var(--bg); border-radius: 16px; padding: 10px 12px; }
+.three li .ic { width: 2.6rem; height: 2.6rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.three li .ic.m { background: var(--peach-soft); color: var(--peach); }
+.three li .ic.p { background: var(--pink-soft); color: var(--pink); }
+.three li .ic.r { background: var(--lav); color: var(--purple); }
+.note-small { font-size: .75rem; color: var(--muted); }
+.wish-cat { margin-bottom: 16px; }
+.wish-cat .lbl { font-weight: 700; font-size: .95rem; margin-bottom: 4px; color: var(--purple); }
+.wish-cat input { margin-bottom: 8px; }
 .opt-row { display: flex; gap: 8px; flex-wrap: wrap; }
-.opt-row .btn { flex: 1; min-width: 6rem; font-weight: 400; border-color: var(--rule); }
-.opt-row .btn[aria-pressed="true"] { border: 2px solid var(--ink); font-weight: 700; }
+.opt-row .btn { flex: 1; min-width: 6rem; }
+.opt-row .btn[aria-pressed="true"] { border: 2px solid var(--pink); background: var(--pink-soft); color: var(--pink); font-weight: 700; }
 .howto { margin: 0; padding-left: 1.3em; font-size: .9rem; }
 
-.toast { position: fixed; left: 50%; bottom: calc(76px + env(safe-area-inset-bottom)); transform: translateX(-50%); opacity: 0;
-  background: var(--ink); color: var(--on-ink); padding: 10px 20px; border-radius: 6px; font-size: .95rem;
-  transition: opacity .25s; pointer-events: none; z-index: 20; max-width: calc(100% - 32px); text-align: center; }
-.toast.show { opacity: 1; }
+.toast { position: fixed; left: 50%; bottom: calc(90px + env(safe-area-inset-bottom)); transform: translateX(-50%) translateY(20px); opacity: 0;
+  background: var(--ink); color: var(--bg); padding: 12px 22px; border-radius: 999px; font-size: 1rem;
+  transition: all .3s; pointer-events: none; z-index: 20; max-width: calc(100% - 32px); text-align: center; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 @media (min-width: 768px) { .toast { bottom: 24px; } }
 
-/* 判子を押す画面 */
+/* キラッと・声かけ */
+.sparkle { position: fixed; pointer-events: none; z-index: 30; width: 18px; height: 18px; animation: up .9s ease-out forwards; }
+.sparkle svg { width: 100%; height: 100%; }
+@keyframes up { from { opacity: 1; transform: translate(-50%, 0) scale(.6) rotate(0); } to { opacity: 0; transform: translate(-50%, -46px) scale(1.2) rotate(40deg); } }
+.cheer { position: fixed; pointer-events: none; z-index: 31; font-weight: 700; color: #fff; background: linear-gradient(135deg, #7350d6, #e8568f);
+  border-radius: 999px; padding: 4px 14px; font-size: .9rem; white-space: nowrap; animation: cheer 1.3s ease-out forwards; }
+@keyframes cheer { 0% { opacity: 0; transform: translate(-50%, 0) scale(.7); } 20% { opacity: 1; transform: translate(-50%, -18px) scale(1.05); } 100% { opacity: 0; transform: translate(-50%, -56px) scale(1); } }
+
+/* お祝いの画面 */
 .party { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 16px;
-  background: rgba(28,26,23,.45); animation: fade .2s ease-out; }
+  background: rgba(46,36,66,.5); backdrop-filter: blur(3px); animation: fade .3s ease-out; }
 @keyframes fade { from { opacity: 0; } }
-.party .box { background: var(--sheet); border-radius: 4px; padding: 28px 22px 20px; text-align: center; max-width: 400px; width: 100%; }
-.hanko {
-  width: 150px; height: 150px; margin: 0 auto 14px; border-radius: 50%; border: 5px solid var(--shu); color: var(--shu);
-  display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: "Klee One", serif; font-weight: 600;
-  transform: rotate(-10deg); animation: press .45s cubic-bezier(.2,.9,.3,1.2) .1s both;
-}
-.hanko .d { font-size: 1.05rem; line-height: 1.2; }
-.hanko .k { font-size: 3.6rem; line-height: 1; }
-.hanko .dt { font-size: .8rem; line-height: 1.2; opacity: .85; }
-@keyframes press { from { transform: rotate(-10deg) scale(1.9); opacity: 0; } 70% { transform: rotate(-10deg) scale(.94); opacity: 1; } to { transform: rotate(-10deg) scale(1); } }
-.party h2 { font-size: 1.3rem; margin: 0 0 6px; }
-.party p { margin: 0 0 14px; }
-.party .stat { font-size: .85rem; color: var(--sub); }
+.party .box { position: relative; z-index: 2; background: var(--card); border-radius: 28px; padding: 24px 22px 22px; text-align: center; max-width: 420px; width: 100%;
+  box-shadow: 0 20px 60px rgba(0,0,0,.3); animation: rise .5s cubic-bezier(.3,1.5,.5,1); }
+@keyframes rise { from { transform: translateY(40px) scale(.9); opacity: 0; } }
+.badge { width: 130px; height: 150px; display: block; margin: 0 auto; animation: swing 1s cubic-bezier(.3,1.5,.5,1); transform-origin: 50% 0; }
+@keyframes swing { 0% { transform: scale(.3) rotate(-25deg); opacity: 0; } 60% { transform: scale(1.05) rotate(6deg); opacity: 1; } 100% { transform: scale(1) rotate(0); } }
+.party h2 { font-size: 1.55rem; margin: 8px 0 6px; color: var(--pink); }
+.party p { margin: 0 0 16px; }
+.party .bigstat { color: var(--muted); margin-bottom: 16px; line-height: 1.6; }
+.party .bigstat b { font-family: "Kiwi Maru", serif; font-size: 1.5rem; color: var(--purple); font-weight: 500; }
+.confetti { position: fixed; top: -20px; z-index: 1; width: 10px; height: 14px; border-radius: 3px; pointer-events: none; animation: fall linear forwards; }
+@keyframes fall { to { transform: translate(var(--dx), 110vh) rotate(var(--rot)); } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -272,15 +306,16 @@ label.chk input { width: 26px; height: 26px; accent-color: var(--shu); flex: non
 
 /* スマホ：ありがとうボタンは入力欄の下に、横いっぱいで */
 @media (max-width: 600px) {
-  .sheet { padding: 16px 14px; }
-  .row { grid-template-columns: 1.4rem 1fr; }
-  .row .thx { grid-column: 2; width: 100%; margin-top: 6px; }
+  .card { padding: 16px; }
+  .row { grid-template-columns: 1.8rem 1fr; }
+  .row .thx { grid-column: 2; width: 100%; }
   .row.solo { grid-template-columns: 1fr; }
   .row.solo .thx { grid-column: 1; }
   .person .pname { grid-template-columns: 1fr; }
   .person .pname .thx { width: 100%; }
-  .dayhead h2 { font-size: 1.5rem; }
-  .wk { grid-template-columns: 1fr; gap: 2px; }
+  .hero h2 { font-size: 1.45rem; }
+  .map { gap: 4px; }
+  .map button { font-size: 1rem; border-radius: 10px; }
 }
 </style>
 </head>
@@ -440,29 +475,45 @@ function setP(obj, path, val) {
   o[ks[ks.length - 1]] = val;
 }
 
+// ---------- 絵（線で描いたアイコン） ----------
+const IC = {
+  sun: '<circle cx="12" cy="12" r="4.2"/><path d="M12 2.8v2.1M12 19.1v2.1M2.8 12h2.1M19.1 12h2.1M5.5 5.5l1.5 1.5M17 17l1.5 1.5M5.5 18.5L7 17M17 7l1.5-1.5"/>',
+  spark: '<path d="M11 3.5c.7 4 2.2 5.5 6.2 6.2-4 .7-5.5 2.2-6.2 6.2-.7-4-2.2-5.5-6.2-6.2 4-.7 5.5-2.2 6.2-6.2z"/><path d="M18.5 14.8c.3 1.6.9 2.2 2.4 2.4-1.5.3-2.1.9-2.4 2.4-.3-1.5-.9-2.1-2.4-2.4 1.5-.2 2.1-.8 2.4-2.4z"/>',
+  moon: '<path d="M19.2 14.6A7.6 7.6 0 0 1 9.4 4.8a7.8 7.8 0 1 0 9.8 9.8z"/><path d="M16.5 4.2v2.4M15.3 5.4h2.4"/>',
+  home: '<path d="M4 11.2l8-6.7 8 6.7"/><path d="M6.2 9.8v9.7h11.6V9.8"/><path d="M10 19.5v-4.6a2 2 0 0 1 4 0v4.6"/>',
+  cal: '<rect x="3.6" y="5.2" width="16.8" height="15" rx="3.5"/><path d="M3.6 10h16.8M8.2 3.3v3.6M15.8 3.3v3.6"/><path d="M9.5 14.6l1.7 1.7 3.4-3.4"/>',
+  book: '<path d="M12 6.6C10 5 7 4.5 4 5v13.6c3-.5 6 0 8 1.6 2-1.6 5-2.1 8-1.6V5c-3-.5-6 0-8 1.6z"/><path d="M12 6.6v13.6"/>',
+  heart: '<path d="M12 20s-7.4-4.5-7.4-10a4.2 4.2 0 0 1 7.4-2.7A4.2 4.2 0 0 1 19.4 10c0 5.5-7.4 10-7.4 10z"/>',
+  tune: '<path d="M4 7.5h9.5M18 7.5h2M4 16.5h3.5M11.5 16.5H20"/><circle cx="15.8" cy="7.5" r="2.2"/><circle cx="9.5" cy="16.5" r="2.2"/>',
+  check: '<path d="M5.5 12.5l4.2 4.2L18.5 8"/>',
+  flame: '<path d="M12 21c-3.6 0-6-2.4-6-5.6 0-3.4 2.6-5 3.4-8.4 2.2 1.4 2.8 3.4 2.8 4.8 1-.6 1.6-1.8 1.8-3 2 1.6 4 3.8 4 6.6 0 3.2-2.4 5.6-6 5.6z"/>',
+  mic: '<rect x="9" y="3.5" width="6" height="11" rx="3"/><path d="M6 11.5a6 6 0 0 0 12 0M12 17.5v3"/>',
+};
+const ico = (k, cls = '') => `<svg class="ico ${cls}" viewBox="0 0 24 24" aria-hidden="true">${IC[k]}</svg>`;
+const SEC_IC = { m: 'sun', p: 'spark', r: 'moon' };
+
 // ---------- 部品 ----------
 const touch = matchMedia('(pointer: coarse)').matches;
-const voiceHint = () => touch ? '<p class="aside">文字を打つのが大変な時は、キーボードのマイクを押して話すと、そのまま文字になります。</p>' : '';
+const voiceHint = () => touch ? `<p class="voice">${ico('mic')}<span>文字を打つのが大変な時は、キーボードのマイクを押して話すだけで書けます</span></p>` : '';
 const WORDS = [
-  '当たり前に見えるものほど、よく見ると贈りもの。',
-  '今日の「よかった」を、ひとつだけ見つけておく。',
-  '「ありがとう」は、声に出すと自分の耳にも届く。',
-  'うまくいかない日にも、ありがたいことは残っている。',
-  '書いておくと、忘れていた恵みがあとで読める。',
-  '朝の10個は、早く書けなくてもかまわない。',
-  'だれかの顔を思い浮かべて、心の中でお礼を言う。',
-  'ゆっくり息を吸えることも、ひとつの恵み。',
-  'できなかった日があっても、また今日から。',
-  '小さなことほど、ていねいに「ありがとう」。',
-  '今日という日は、今日しかない。',
-  '感謝は、慣れるほど自然に出てくる。',
+  '「ありがとう」を言うたびに、毎日は少しずつ明るくなる',
+  '当たり前に見えるものほど、じつは贈りもの',
+  '今日の小さな「よかった」を、ひとつ見つけよう',
+  '感謝は、口に出すほど大きくなる',
+  'うまくいかない日にも、ありがたいことはかくれている',
+  '心をこめた「ありがとう」は、自分にも返ってくる',
+  '今あるものに気づくと、もっとうれしいことに気づける',
+  'ゆっくり深呼吸。それだけで、もう一つの恵み',
+  'だれかの顔を思い浮かべて、心の中で「ありがとう」',
+  '書けば書くほど、感謝はくっきり見えてくる',
+  '今日という日は、二度と来ない特別な一日',
+  'あなたのまわりは、思っているよりずっと恵みでいっぱい',
 ];
-const MILES = {
-  7: '一週間、続きました。',
-  14: '半分まで来ました。ここからは、願いに感謝を向けていきます。',
-  21: '三週間、続きました。残りはあと一週間です。',
-  28: '二十八日間、やり終えました。明日からも、朝の10個と夜の石は続けられます。',
-};
+const CHEERS = ['すてき！', 'ありがとうが届いた', 'いいね！', 'その調子！', 'かんぺき！', 'うれしいね'];
+const MILES = { 7: ['1週間 続きました！', '最初の1週間、すばらしい。感謝が習慣になりはじめています。'],
+  14: ['折り返し地点！', '28日の旅の半分まで来ました。ここからは願いに感謝を向けていきます。'],
+  21: ['3週間 達成！', 'ここまで来た自分に、まず「ありがとう」。ゴールはもうすぐです。'],
+  28: ['28日間 やりとげました！', 'おめでとうございます。魔法はこれからも、毎日の「ありがとう」で続いていきます。'] };
 
 function thxBtn(path, max, label = 'ありがとう') {
   const v = Math.min(+getP(rec(ui.n).data, path) || 0, max);
@@ -475,7 +526,7 @@ function inp(path, ph = '', cls = '') {
 function fList(f) {
   let h = '';
   for (let i = 0; i < f.n; i++) {
-    h += `<div class="row"><div class="no">${i + 1}</div><div class="fields">${inp(`${f.key}.${i}.t`, i === 0 && f.ph ? f.ph : '')}${f.why ? inp(`${f.key}.${i}.w`, f.whyPh, 'why') : ''}</div>${f.thanks ? thxBtn(`${f.key}.${i}.c`, f.thanks) : ''}</div>`;
+    h += `<div class="row"><div class="no">${i + 1}</div><div class="fields">${inp(`${f.key}.${i}.t`, i === 0 && f.ph ? f.ph : `${i + 1}つ目`)}${f.why ? inp(`${f.key}.${i}.w`, f.whyPh, 'why') : ''}</div>${f.thanks ? thxBtn(`${f.key}.${i}.c`, f.thanks) : ''}</div>`;
   }
   return h;
 }
@@ -510,19 +561,19 @@ function field(f) {
       const v = +d[f.key] || 0, pct = Math.min(100, v / f.target * 100);
       return `<div class="field counter">${lbl}<div class="big">${v}<small> / ${f.target}${f.unit}</small></div>
         <div class="bar"><i style="width:${pct}%"></i></div>
-        <div class="btns"><button class="btn ink big" data-act="count" data-k="${f.key}" data-d="1">＋1　ありがとう</button>
-        ${f.big ? `<button class="btn big" data-act="count" data-k="${f.key}" data-d="${f.big}">＋${f.big}</button>` : ''}</div>
-        <button class="link" data-act="count" data-k="${f.key}" data-d="-1">1つ戻す</button></div>`;
+        <div class="btns"><button class="btn main big" data-act="count" data-k="${f.key}" data-d="1">＋1 ありがとう</button>
+        ${f.big ? `<button class="btn big" data-act="count" data-k="${f.key}" data-d="${f.big}">＋${f.big}</button>` : ''}
+        <button class="btn ghost" data-act="count" data-k="${f.key}" data-d="-1">1つ戻す</button></div></div>`;
     }
     case 'timer': {
       const done = !!d[f.key];
-      return `<div class="field counter">${lbl}<div class="big" id="tm-${f.key}">${done ? '済' : fmtSec(f.sec)}</div>
-        <div class="btns"><button class="btn ink big" data-act="timer" data-k="${f.key}" data-sec="${f.sec}">${done ? 'もう一度' : 'はじめる'}</button></div></div>`;
+      return `<div class="field counter">${lbl}<div class="big" id="tm-${f.key}">${done ? 'できた' : fmtSec(f.sec)}</div>
+        <div class="btns"><button class="btn main big" data-act="timer" data-k="${f.key}" data-sec="${f.sec}">${done ? 'もう一度' : 'はじめる'}</button></div></div>`;
     }
     case 'breath': {
       const v = +d[f.key] || 0;
       return `<div class="field breath"><div class="orb" id="orb-${f.key}"></div><div class="say" id="say-${f.key}">今日の深呼吸：${v}回</div>
-        <div class="btns"><button class="btn ink big" data-act="breath" data-k="${f.key}" data-times="${f.times}">${f.times}回の呼吸をはじめる</button></div></div>`;
+        <div class="btns"><button class="btn main big" data-act="breath" data-k="${f.key}" data-times="${f.times}">${f.times}回の感謝の呼吸をはじめる</button></div></div>`;
     }
     case 'favs': return `<div class="field">${lbl}${DAYS.slice(0, 27).map((x, i) =>
       `<label class="chk"><input type="checkbox" data-k="${f.key}.${i + 1}" ${getP(d, `${f.key}.${i + 1}`) ? 'checked' : ''}>${i + 1}日目　${esc(x.t)}</label>`).join('')}</div>`;
@@ -535,6 +586,12 @@ const fmtSec = s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
 const filledM = d => Object.values(d.m || {}).filter(x => x?.t?.trim()).length;
 const hasVal = v => !!v && (typeof v !== 'object' || Object.values(v).some(hasVal));
 const hasP = d => Object.entries(d).some(([k, v]) => k !== 'm' && k !== 'rock' && hasVal(v));
+function todayPct(n) {
+  const d = rec(n).data, parts = [Math.min(filledM(d), 10) / 10];
+  if (dayDef(n).f.length) parts.push(hasP(d) ? 1 : 0);
+  if (n >= 2) parts.push(getP(d, 'rock.c') ? 1 : 0);
+  return Math.round(parts.reduce((a, b) => a + b, 0) / parts.length * 100);
+}
 function streak() {
   const dates = new Set(Object.values(S.days).map(r => r.done).filter(Boolean));
   const d = new Date(); let c = 0;
@@ -554,11 +611,11 @@ function render() {
   Object.values(timers).forEach(clearInterval);
   const cur = currentDay();
   if (ui.n == null) ui.n = cur;
-  let h = `<header class="top"><div><span class="title">ザ・マジック</span><span class="sub">28日間の感謝の記録</span></div>
-    <div class="count">ありがとう<b id="total">${S.total}</b>回</div></header>`;
+  let h = `<header class="top"><h1>${ico('spark')}<span>ザ・マジック<small>28日間の感謝の実践</small></span></h1>
+    <div class="total">ありがとうの数<b id="total">${S.total}</b></div></header>`;
   if (!S.started) { app.innerHTML = h + intro(); return; }
-  const tabs = [['today', '今日'], ['map', '28日'], ['log', '記録'], ['wish', '願い'], ['set', '設定']];
-  h += `<nav class="tabs">${tabs.map(([k, l]) => `<button data-act="tab" data-tab="${k}" aria-current="${ui.tab === k}">${l}</button>`).join('')}</nav>`;
+  const tabs = [['today', 'home', '今日'], ['map', 'cal', '28日'], ['log', 'book', '記録'], ['wish', 'heart', '願い'], ['set', 'tune', '設定']];
+  h += `<nav class="tabs">${tabs.map(([k, i, l]) => `<button data-act="tab" data-tab="${k}" aria-current="${ui.tab === k}">${ico(i)}${l}</button>`).join('')}</nav>`;
   if (ui.tab === 'today') h += ui.sec ? viewSection() : viewHome(cur);
   else h += { map: viewMap, log: viewLog, wish: viewWish, set: viewSet }[ui.tab](cur);
   app.innerHTML = h;
@@ -568,143 +625,198 @@ function optRow(act, opts, val) {
   return `<div class="opt-row">${opts.map(([k, l]) => `<button class="btn" data-act="${act}" data-v="${k}" aria-pressed="${val === k}">${l}</button>`).join('')}</div>`;
 }
 const SIZES = [['m', 'ふつう'], ['l', '大きい'], ['xl', 'とても大きい']];
+const heroDeco = () => `${ico('spark', 'deco a')}${ico('spark', 'deco b')}${ico('spark', 'deco c')}`;
 
 function intro() {
-  return `<div class="intro">
-    <h2>28日間、毎日「ありがとう」を書く</h2>
-    <p>ロンダ・バーンさんの本『ザ・マジック』にある28日間の感謝の練習を、このノートに書きながら進めます。</p>
-    <p>毎日やるのは次の3つです。</p>
-    <ul class="daily">
-      <li><span class="seal">朝</span><div><b>朝の感謝</b><br><span class="small">ありがたいことを10個書いて、1つずつ「ありがとう」</span></div></li>
-      <li><span class="seal">実</span><div><b>今日の実践</b><br><span class="small">日ごとにちがう練習。やり方はその日に出ます</span></div></li>
-      <li><span class="seal">夜</span><div><b>夜の石</b><br><span class="small">石を手に、今日いちばんよかったことに「ありがとう」（2日目から）</span></div></li>
+  return `<div class="card hero">${heroDeco()}<div class="num">28日間の感謝の実践</div><h2>ようこそ<br>魔法の28日間へ</h2>
+    <p class="lead">毎日の「ありがとう」で、<br>人生に小さな魔法を起こしていく旅です。</p></div>
+    <div class="card intro">
+    <p>ロンダ・バーンさんの本『ザ・マジック』の、28日間の感謝の実践を、ここに書きこみながら進めます。</p>
+    <h3>毎日やるのは、この3つ</h3>
+    <ul class="three">
+      <li><span class="ic m">${ico('sun')}</span><div><b>朝</b>　ありがたいことを10個書いて「ありがとう」</div></li>
+      <li><span class="ic p">${ico('spark')}</span><div><b>今日の実践</b>　日ごとにちがう感謝の練習</div></li>
+      <li><span class="ic r">${ico('moon')}</span><div><b>夜</b>　石を手に、今日いちばんよかったことに「ありがとう」（2日目から）</div></li>
     </ul>
     <p>用意するもの：手のひらに収まる石ひとつ（2日目）、大切な人の写真（3日目）</p>
-    <div class="sheet"><h3>文字の大きさ</h3>${optRow('size', SIZES, curSize())}<p class="small" style="margin:10px 0 0">あとから「設定」でも変えられます。</p></div>
-    <div class="btns"><button class="btn ink big wide" data-act="start">1日目をはじめる</button></div>
-    <p class="small" style="margin-top:18px">書いたことは、この機械（スマホ・パソコン）の中だけに残ります。ほかの人には見えません。<br>各日の内容は本の要点を短くまとめたものです。くわしくは本で確かめてください。</p>
+    <h3>文字の大きさ</h3>
+    ${optRow('size', SIZES, curSize())}
+    <p class="note-small" style="margin-top:12px">あとから「設定」でも変えられます。</p>
+    <div class="btns" style="margin-top:18px"><button class="btn main big wide" data-act="start">魔法の1日目をはじめる</button></div>
+    <p class="note-small" style="margin-top:16px">記録はこの機械（スマホ・パソコン）の中だけに保存され、ほかの人には見えません。<br>各日の内容は本の要点を短くまとめたものです。くわしくは本で確かめてください。</p>
   </div>`;
 }
 
-function task(sec, ch, title, sub, done) {
-  return `<button class="task ${done ? 'done' : ''}" data-act="sec" data-sec="${sec}"><span class="seal ${done ? 'on' : ''}">${ch}</span>
-    <span class="tx"><b>${esc(title)}</b><small>${esc(sub)}</small></span><span class="go">${done ? '済' : '書く ›'}</span></button>`;
+function secBtn(sec, title, sub, done, mid) {
+  return `<button class="sec-btn ${done ? 'ok' : ''}" data-act="sec" data-sec="${sec}"><span class="ic ${sec}">${ico(SEC_IC[sec])}</span>
+    <span class="tx"><b>${esc(title)}</b><small>${esc(sub)}</small></span><span class="st">${done ? ico('check') + 'できた' : mid || 'ひらく ›'}</span></button>`;
 }
 
 function viewHome(cur) {
   const n = ui.n, def = dayDef(n), r = rec(n), d = r.data, ph = phaseOf(n);
-  let h = `<div class="dayhead"><div class="dno"><b>${n}</b>日目${n <= 28 ? '　／ 28日' : ''}</div>
+  const pct = todayPct(n), C = 2 * Math.PI * 36;
+  const msg = r.done ? ['今日の魔法、完了！', 'また明日も会いましょう'] : pct === 0 ? ['さあ、はじめよう', '下のボタンから、朝の感謝へ'] : pct < 100 ? ['いい調子！', 'あと少しで今日の魔法が完成'] : ['ぜんぶできた！', 'いちばん下のボタンで今日を終えよう'];
+  let h = `<div class="card hero">${heroDeco()}
+    <div class="num">${n <= 28 ? `${n}日目 ／ 28日` : `${n}日目　28日の先へ`}</div>
     <h2>${esc(def.t)}</h2><p class="lead">${esc(def.lead)}</p>
-    ${ph ? `<p class="phase">${ph.from}〜${ph.to}日目は「${ph.name}」</p>` : ''}</div>`;
-  h += `<div class="meta"><span>続けて <b>${streak()}</b> 日</span><span>済んだ日 <b>${doneCount()}</b> / 28</span></div>`;
+    <div class="ring-wrap"><svg class="ring" viewBox="0 0 84 84"><circle class="bg" cx="42" cy="42" r="36"/>
+      <circle class="fg" cx="42" cy="42" r="36" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - (r.done ? 1 : pct / 100))}"/><text x="42" y="42">${r.done ? '完了' : pct + '%'}</text></svg>
+      <div class="ring-msg"><b>${msg[0]}</b>${msg[1]}</div></div>
+    ${ph ? `<span class="phase">${ph.from}〜${ph.to}日目：${ph.name}</span>` : ''}
+  </div>`;
+  h += `<div class="streak"><span>${ico('flame')}連続 <b>${streak()}</b> 日</span><span>${ico('heart')}達成 <b>${doneCount()}</b> / 28</span></div>`;
   const fm = filledM(d), items = [];
-  items.push(task('m', '朝', n === 1 ? '朝の感謝（これが今日の実践）' : '朝の感謝', `${fm} / 10個 書きました`, fm >= 10));
-  if (def.f.length) items.push(task('p', '実', '今日の実践', def.t, false));
-  if (n >= 2) items.push(task('r', '夜', '夜の石', d.rock?.t || '寝る前に', !!getP(d, 'rock.c')));
-  h += `<div class="tasks">${items.join('')}</div>`;
+  items.push(secBtn('m', n === 1 ? '朝の感謝（今日の実践）' : '朝の感謝', `${fm} / 10個 書きました`, fm >= 10, fm ? 'つづき ›' : ''));
+  if (def.f.length) items.push(secBtn('p', '今日の実践', def.t, false, hasP(d) ? 'つづき ›' : ''));
+  if (n >= 2) items.push(secBtn('r', '夜の魔法の石', d.rock?.t || '寝る前に', !!getP(d, 'rock.c')));
+  h += `<h3 class="sec-title">今日やること</h3><div class="secs">${items.join('')}</div>`;
   if (r.done) {
-    h += `<div class="finished"><span class="seal on">済</span><p>${n}日目は ${fmtDate(r.done)} に済みました。<br><span class="small">${n < 28 ? 'また明日。' : n === 28 ? '28日間、おつかれさまでした。' : ''}</span></p></div>
-      <div class="btns"><button class="link" data-act="undone">済みを取り消す</button></div>`;
+    h += `<div class="card done-box"><div class="stamp">${ico('heart')}${n}日目 完了（${fmtDate(r.done)}）</div>
+      <p class="hint">${n < 28 ? 'また明日、次の魔法へ。' : n === 28 ? '28日間、おつかれさまでした。明日からも魔法は続きます。' : ''}</p>
+      <button class="btn ghost" data-act="undone">完了を取り消す</button></div>`;
   } else if (n === cur) {
     const doneToday = Object.values(S.days).some(x => x.done === today());
-    h += `<div class="finish">
+    h += `<div class="card done-box">
       ${doneToday ? '<p class="hint">今日はもう1日分を終えています。1日に1つずつ進めるのがおすすめです。</p>' : ''}
-      <button class="btn ink big wide" data-act="done">今日の分を終える</button>
-      <p class="note">ぜんぶ書けていなくても終えられます。</p></div>`;
+      <button class="btn main big wide" data-act="done">今日の分を終える</button>
+      <p class="note-small" style="margin-top:8px">ぜんぶ書けていなくても終えられます。</p></div>`;
   }
-  h += `<div class="word"><small>ひとこと</small>${WORDS[(n - 1) % WORDS.length]}</div>`;
+  h += `<div class="card word"><small>今日のことば</small>${WORDS[(n - 1) % WORDS.length]}</div>`;
   h += `<div class="daynav"><button data-act="go" data-n="${n - 1}" ${n <= 1 ? 'disabled' : ''}>‹ 前の日</button>
     ${n !== cur ? `<button data-act="go" data-n="${cur}">今の日へ</button>` : ''}
     <button data-act="go" data-n="${n + 1}" ${n >= cur ? 'disabled' : ''}>次の日 ›</button></div>`;
   return h;
 }
 
-const stepsBox = def => `<div class="sheet"><h3>やり方</h3><ol class="howto-steps">${def.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol></div>`;
+const stepsCard = def => `<div class="card"><h3>やり方</h3><ol class="steps">${def.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol></div>`;
+const secHead = (sec, title) => `<h3><span class="bubble ${sec}">${ico(SEC_IC[sec])}</span>${esc(title)}</h3>`;
 
 function viewSection() {
   const n = ui.n, def = dayDef(n), s = ui.sec;
-  let h = '<button class="back" data-act="home">‹ 今日に戻る</button>';
+  let h = '<button class="back" data-act="home">‹ 今日のページに戻る</button>';
   if (s === 'm') {
-    if (n === 1) h += stepsBox(def);
-    h += `<div class="sheet"><h3><span class="seal">朝</span>朝の感謝</h3><p class="hint">ありがたいことを10個書きます。下の欄に理由も書けたら書きましょう。<br>書いたら1つずつ、心をこめて「ありがとう」を3回（ボタンを3回押す）。</p>${voiceHint()}${fList(MORNING)}</div>`;
+    if (n === 1) h += stepsCard(def);
+    h += `<div class="card">${secHead('m', '朝の感謝')}<p class="hint">ありがたいことを10個書きます。理由も書けたら書きましょう。<br>書いたら1つずつ、心をこめて「ありがとう」を3回（ボタンを3回押す）。</p>${voiceHint()}${fList(MORNING)}</div>`;
   } else if (s === 'p') {
-    h += stepsBox(def) + `<div class="sheet"><h3><span class="seal">実</span>${esc(def.t)}</h3>${voiceHint()}${def.f.map(field).join('')}</div>`;
+    h += stepsCard(def) + `<div class="card">${secHead('p', def.t)}${voiceHint()}${def.f.map(field).join('')}</div>`;
   } else {
-    h += `<div class="sheet"><h3><span class="seal">夜</span>夜の石</h3><p class="hint">石を手に持って、今日いちばんよかったことを思い出します。書いたら「ありがとう」。</p>${voiceHint()}
+    h += `<div class="card">${secHead('r', '夜の魔法の石')}<p class="hint">石を手に持って、今日いちばんよかったことを思い出します。書いたら「ありがとう」。</p>${voiceHint()}
       <div class="row solo"><div class="fields">${inp('rock.t', '今日いちばんよかったこと')}</div>${thxBtn('rock.c', 1)}</div></div>`;
   }
-  h += '<div class="btns"><button class="btn ink big wide" data-act="home">書けたら、今日に戻る</button></div>';
+  h += '<div class="btns"><button class="btn main big wide" data-act="home">できた！ 今日のページに戻る</button></div>';
   return h;
 }
 
 function viewMap(cur) {
   const cell = n => {
     const r = S.days[n];
-    return `<button class="cell ${r?.done ? 'on' : ''} ${n === cur ? 'cur' : ''}" data-act="go" data-n="${n}" ${n > cur ? 'disabled' : ''} title="${esc(DAYS[n - 1].t)}">${n}<small>${r?.done ? fmtDate(r.done) : ''}</small></button>`;
+    const sub = r?.done ? fmtDate(r.done) : MILES[n] ? ico('heart') : '';
+    return `<button class="${r?.done ? 'done' : ''} ${n === cur ? 'cur' : ''} ${MILES[n] ? 'mile' : ''}" data-act="go" data-n="${n}" ${n > cur ? 'disabled style="opacity:.45"' : ''} title="${esc(DAYS[n - 1].t)}">${n}<small>${sub}</small></button>`;
   };
-  let h = `<div class="sheet"><h3>28日の表</h3><div class="weeks">`;
-  for (let w = 0; w < 4; w++) {
-    h += `<div class="wk"><span class="wl">${w + 1}週目</span><div class="cells">`;
-    for (let n = w * 7 + 1; n <= w * 7 + 7; n++) h += cell(n);
-    h += '</div></div>';
-  }
-  const dc = doneCount(), extra = Object.keys(S.days).filter(k => +k > 28 && S.days[k].done).length;
-  h += `</div><p class="legend">朱の丸が済んだ日、太い枠が今の日です。${dc >= 28 ? '28日、すべて済みました。' : `残りは ${28 - dc} 日。`}${extra ? `　29日目からも ${extra} 日続けています。` : ''}</p></div>`;
-  h += '<div class="sheet"><h3>28の実践</h3>';
+  const dc = doneCount();
+  let h = `<div class="card"><h3>28日の旅</h3><div class="journey"><i style="width:${dc / 28 * 100}%"></i></div>
+    <p class="hint">${dc >= 28 ? '28日の旅を、やりとげました！' : `ゴールまで、あと <b>${28 - dc}</b> 日`}</p>`;
   for (const p of PHASES) {
-    h += `<div class="phase-h">${p.from}〜${p.to}日目　${p.name}</div>`;
-    for (let n = p.from; n <= p.to; n++) {
-      const d = DAYS[n - 1];
-      h += `<div class="log-item ${n > cur ? 'off' : ''}" data-act="go" data-n="${n}"><div class="d">${n}日目</div><div>${esc(d.t)}<div class="best">${esc(d.lead)}</div></div></div>`;
-    }
+    h += `<div class="phase-lbl">${p.from}〜${p.to}日目：${p.name}</div><div class="map">`;
+    for (let n = p.from; n <= p.to; n++) h += cell(n);
+    h += '</div>';
   }
-  return h + '</div>';
+  const extra = Object.keys(S.days).filter(k => +k > 28 && S.days[k].done).length;
+  h += `<div class="legend"><span>色つき＝達成</span><span>ピンクの枠＝今の日</span><span>点線＝ごほうびの日（7・14・21・28日目）</span>${extra ? `<span>29日目以降：${extra}日続けています</span>` : ''}</div></div>`;
+  h += `<div class="card"><h3>28の実践</h3>${DAYS.map((d, i) => `<div class="log-item" data-act="go" data-n="${i + 1}" ${i + 1 > cur ? 'style="opacity:.5;pointer-events:none"' : ''}><div class="d">${i + 1}日目</div><div>${esc(d.t)}<div class="best">${esc(d.lead)}</div></div></div>`).join('')}</div>`;
+  return h;
 }
 
 function viewLog() {
   const done = Object.entries(S.days).filter(([, r]) => r.done).sort((a, b) => b[0] - a[0]);
-  if (!done.length) return '<div class="sheet"><p class="hint" style="margin:0">まだ記録がありません。1日目を終えると、ここに並びます。</p></div>';
-  return `<div class="sheet"><h3>これまでの記録</h3><p class="hint">夜の石に書いた「今日いちばんよかったこと」を読み返せます。押すとその日を開けます。</p>
+  if (!done.length) return '<div class="card"><p class="hint" style="margin:0">まだ記録がありません。1日目を終えると、ここに並びます。</p></div>';
+  return `<div class="card"><h3>魔法の記録</h3><p class="hint">夜の石に書いた「今日いちばんよかったこと」をふり返れます。押すとその日を開けます。</p>
     ${done.map(([n, r]) => `<div class="log-item" data-act="go" data-n="${n}"><div class="d">${n}日目<small>${fmtDate(r.done)}</small></div>
       <div>${esc(dayDef(+n).t)}<div class="best">${r.data.rock?.t ? esc(r.data.rock.t) : '朝の感謝 ' + filledM(r.data) + '個'}</div></div></div>`).join('')}</div>`;
 }
 
 function viewWish() {
-  return `<div class="sheet"><h3>願いのリスト</h3><p class="hint">叶えたいことを、分野ごとに書いておきます。13日目からの実践で使います。いつでも書き足せます。</p>${voiceHint()}
+  return `<div class="card"><h3>願いのリスト</h3><p class="hint">叶えたいことを、分野ごとに書いておきます。13日目からの実践で使います。いつでも書き足せます。</p>${voiceHint()}
     ${WISH_CATS.map(([k, l]) => `<div class="wish-cat"><div class="lbl">${l}</div>${[0, 1, 2].map(i =>
       `<input type="text" data-w="${k}.${i}" value="${esc(getP(S.wishes, `${k}.${i}`))}" placeholder="${i === 0 ? '願いを書く' : ''}">`).join('')}</div>`).join('')}</div>`;
 }
 
 function viewSet() {
-  return `<div class="sheet"><h3>文字の大きさ</h3>${optRow('size', SIZES, curSize())}</div>
-    <div class="sheet"><h3>画面の色</h3>${optRow('theme', [['auto', '自動'], ['light', '明るい'], ['dark', '暗い']], S.theme)}</div>
-    <div class="sheet"><h3>スマホのホーム画面に置く</h3><p class="hint">ホーム画面のアイコンから、すぐ開けるようになります。書いたことも消えにくくなります。</p>
+  return `<div class="card"><h3>文字の大きさ</h3>${optRow('size', SIZES, curSize())}</div>
+    <div class="card"><h3>画面の色</h3>${optRow('theme', [['auto', '自動'], ['light', '明るい'], ['dark', '夜空']], S.theme)}</div>
+    <div class="card"><h3>スマホのホーム画面に置く</h3><p class="hint">アプリのように、ホーム画面のアイコンからすぐ開けるようになります。記録も消えにくくなります。</p>
       <ul class="howto"><li><b>iPhone</b>：Safariで開いて、下の共有ボタン（四角に上向き矢印）→「ホーム画面に追加」</li>
       <li><b>Android</b>：Chromeで開いて、右上の「︙」→「ホーム画面に追加」</li></ul></div>
-    <div class="sheet"><h3>控えを取る</h3><p class="hint">書いたことはこの機械の中だけにあります。機械を替える時や念のために、ときどきファイルに書き出してください。別の機械では「読みこむ」で続きから使えます。</p>
-    <div class="btns" style="justify-content:flex-start"><button class="btn ink" data-act="export">ファイルに書き出す</button><button class="btn" data-act="import">ファイルから読みこむ</button></div></div>
-    <div class="sheet"><h3>最初からやり直す</h3><p class="hint">書いたことをすべて消して、1日目に戻ります。先に控えを取るのがおすすめです。</p>
-    <button class="btn danger" data-act="reset">すべて消す</button></div>
-    <p class="small">はじめた日：${esc(S.started)}</p>`;
+    <div class="card"><h3>バックアップ</h3><p class="hint">記録はこの機械の中だけに保存されています。機械を替える時や念のために、ときどきファイルに書き出してください。別の機械では「読みこむ」で続きから使えます。</p>
+    <div class="btns" style="justify-content:flex-start"><button class="btn main" data-act="export">ファイルに書き出す</button><button class="btn" data-act="import">ファイルから読みこむ</button></div></div>
+    <div class="card"><h3>最初からやり直す</h3><p class="hint">すべての記録を消して、1日目に戻ります。先にバックアップを取るのがおすすめです。</p>
+    <button class="btn danger" data-act="reset">すべての記録を消す</button></div>
+    <p class="note-small">開始日：${esc(S.started)}</p>`;
 }
 
-// ---------- 合図 ----------
+// ---------- 演出 ----------
 function toast(msg) {
   const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
   clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove('show'), 2400);
 }
-const buzz = () => { try { navigator.vibrate?.(12); } catch (e) {} };
-function stamp(n) {
-  const msg = MILES[n] || (n === 1 ? '最初の一日が済みました。明日の朝も、10個の「ありがとう」から。' : '今日の分が済みました。また明日。');
+const SPARK_COLORS = ['#e8568f', '#7350d6', '#f48a62', '#ffb3cf'];
+function sparkle(el, count = 1) {
+  const b = el.getBoundingClientRect();
+  for (let i = 0; i < count; i++) {
+    const s = document.createElement('div'), c = SPARK_COLORS[i % SPARK_COLORS.length];
+    s.className = 'sparkle';
+    s.innerHTML = `<svg viewBox="0 0 24 24"><path fill="${c}" d="${i % 3 === 2 ? 'M12 20s-7.4-4.5-7.4-10a4.2 4.2 0 0 1 7.4-2.7A4.2 4.2 0 0 1 19.4 10c0 5.5-7.4 10-7.4 10z' : 'M12 2c.9 5.2 2.8 7.1 8 8-5.2.9-7.1 2.8-8 8-.9-5.2-2.8-7.1-8-8 5.2-.9 7.1-2.8 8-8z'}"/></svg>`;
+    s.style.left = b.left + b.width / 2 + (count > 1 ? (Math.random() - .5) * b.width : 0) + 'px';
+    s.style.top = b.top + (count > 1 ? Math.random() * b.height : 0) + 'px';
+    s.style.animationDelay = i * 40 + 'ms';
+    document.body.appendChild(s); setTimeout(() => s.remove(), 1100 + i * 40);
+  }
+}
+function cheer(el) {
+  const b = el.getBoundingClientRect(), c = document.createElement('div');
+  c.className = 'cheer'; c.textContent = CHEERS[Math.floor(Math.random() * CHEERS.length)];
+  c.style.left = b.left + b.width / 2 + 'px'; c.style.top = b.top - 6 + 'px';
+  document.body.appendChild(c); setTimeout(() => c.remove(), 1300);
+}
+function confetti(n = 70) {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const colors = ['#7350d6', '#e8568f', '#f48a62', '#ffb3cf', '#b39cff', '#ffd2a8'];
+  for (let i = 0; i < n; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.background = colors[i % colors.length];
+    c.style.setProperty('--dx', (Math.random() - .5) * 200 + 'px');
+    c.style.setProperty('--rot', Math.random() * 1080 + 'deg');
+    c.style.animationDuration = 2 + Math.random() * 2 + 's';
+    c.style.animationDelay = Math.random() * .6 + 's';
+    if (i % 3 === 0) c.style.borderRadius = '50%';
+    document.body.appendChild(c); setTimeout(() => c.remove(), 5000);
+  }
+}
+// リボン付きのバッジ（ごほうびの日は色を変える）
+function badge(n) {
+  const [r1, r2, c1, c2] = MILES[n] ? ['#f48a62', '#e8568f', '#ffb36b', '#f06292'] : ['#e8568f', '#7350d6', '#a55bd3', '#ec6a9f'];
+  return `<svg class="badge" viewBox="0 0 130 150" aria-hidden="true">
+    <defs><linearGradient id="bdg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs>
+    <path d="M44 84 L30 142 L50 130 L62 148 L66 86z" fill="${r1}"/><path d="M86 84 L100 142 L80 130 L68 148 L64 86z" fill="${r2}"/>
+    <circle cx="65" cy="62" r="50" fill="url(#bdg)"/><circle cx="65" cy="62" r="40" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="3 5" opacity=".8"/>
+    <text x="65" y="60" text-anchor="middle" fill="#fff" font-family="Kiwi Maru, serif" font-size="34">${n}</text>
+    <text x="65" y="84" text-anchor="middle" fill="#fff" font-family="M PLUS Rounded 1c, sans-serif" font-size="13" font-weight="700">日目</text>
+    <path d="M20 22c.5 3 1.6 4.1 4.6 4.6-3 .5-4.1 1.6-4.6 4.6-.5-3-1.6-4.1-4.6-4.6 3-.5 4.1-1.6 4.6-4.6z M112 14c.4 2.4 1.3 3.3 3.7 3.7-2.4.4-3.3 1.3-3.7 3.7-.4-2.4-1.3-3.3-3.7-3.7 2.4-.4 3.3-1.3 3.7-3.7z" fill="#f48a62"/>
+  </svg>`;
+}
+function party(n) {
+  const m = MILES[n] || [`${n}日目 達成！`, n === 1 ? '魔法の旅の第一歩。最初の「ありがとう」が、もう魔法をはじめています。' : '今日も「ありがとう」をたくさん届けました。'];
   const left = Math.max(0, 28 - doneCount());
   const el = document.createElement('div');
   el.className = 'party';
-  el.innerHTML = `<div class="box"><div class="hanko"><span class="d">${n}日目</span><span class="k">済</span><span class="dt">${fmtDate(today())}</span></div>
-    <h2>${n}日目が済みました</h2><p>${esc(msg)}</p>
-    <p class="stat">ありがとう ${S.total}回${n < 28 ? `　・　残り ${left}日` : ''}</p>
-    <button class="btn ink big wide" data-close>閉じる</button></div>`;
+  el.innerHTML = `<div class="box">${badge(n)}<h2>${esc(m[0])}</h2><p>${esc(m[1])}</p>
+    <div class="bigstat"><div>ありがとうの数 <b>${S.total}</b></div>${n < 28 ? `<div>ゴールまで あと <b>${left}</b> 日</div>` : ''}</div>
+    <button class="btn main big wide" data-close>やったね！</button></div>`;
   el.addEventListener('click', e => { if (e.target === el || e.target.closest('[data-close]')) el.remove(); });
   document.body.appendChild(el);
+  confetti(MILES[n] ? 120 : 70);
   try { navigator.vibrate?.([20, 60, 40]); } catch (e) {}
 }
 function addTotal(k = 1) {
@@ -712,6 +824,7 @@ function addTotal(k = 1) {
   const t = document.getElementById('total');
   if (t) t.textContent = S.total;
 }
+const buzz = () => { try { navigator.vibrate?.(12); } catch (e) {} };
 function morningAllDone() {
   const m = rec(ui.n).data.m || {};
   return [...Array(10).keys()].every(i => m[i]?.t?.trim() && m[i].c >= 3);
@@ -731,7 +844,7 @@ app.addEventListener('click', e => {
     case 'start':
       S.started = today(); save(); ui.n = 1;
       navigator.storage?.persist?.().catch(() => {});
-      render(); break;
+      render(); confetti(40); break;
     case 'tab': ui.tab = el.dataset.tab; ui.sec = null; if (ui.tab === 'today') ui.n = currentDay(); render(); scrollTo(0, 0); break;
     case 'go': ui.n = Math.max(1, +el.dataset.n); ui.tab = 'today'; ui.sec = null; render(); scrollTo(0, 0); break;
     case 'sec': ui.sec = el.dataset.sec; render(); scrollTo(0, 0); break;
@@ -739,13 +852,16 @@ app.addEventListener('click', e => {
     case 'thanks': {
       const max = +el.dataset.max, v = +getP(d, k) || 0;
       if (v < max) { setP(d, k, v + 1); addTotal(); save(); buzz(); }
+      const full = v + 1 >= max;
+      sparkle(el, full ? 6 : 1);
+      if (v < max && full) cheer(el);
       el.outerHTML = thxBtn(k, max);
-      if (v < max && k.startsWith('m.') && morningAllDone()) toast('朝の感謝、10個すべて済みました');
+      if (v < max && k.startsWith('m.') && morningAllDone()) { toast('朝の感謝、ぜんぶできました！'); confetti(30); }
       break;
     }
     case 'count': {
       const delta = +el.dataset.d, v = Math.max(0, (+d[k] || 0) + delta);
-      if (delta > 0) { addTotal(delta); buzz(); }
+      if (delta > 0) { addTotal(delta); sparkle(el, 3); buzz(); }
       d[k] = v; save(); const y = scrollY; render(); scrollTo(0, y);
       break;
     }
@@ -753,7 +869,7 @@ app.addEventListener('click', e => {
     case 'breath': runBreath(el, k, +el.dataset.times); break;
     case 'done': {
       const n = ui.n; rec(n).done = today(); save();
-      render(); scrollTo(0, 0); stamp(n);
+      render(); scrollTo(0, 0); party(n);
       break;
     }
     case 'undone': delete rec(ui.n).done; save(); render(); break;
@@ -762,7 +878,7 @@ app.addEventListener('click', e => {
     case 'export': exportData(); break;
     case 'import': document.getElementById('importFile').click(); break;
     case 'reset':
-      if (confirm('書いたことをすべて消します。よろしいですか？') && confirm('本当に消しますか？元に戻せません。')) {
+      if (confirm('すべての記録を消します。よろしいですか？') && confirm('本当に消しますか？元に戻せません。')) {
         S = fresh(); save(); ui = { tab: 'today', n: null, sec: null }; render();
       }
       break;
@@ -777,7 +893,7 @@ function runTimer(btn, k, sec) {
     left--; out.textContent = fmtSec(left);
     if (left <= 0) {
       clearInterval(timers[k]); rec(ui.n).data[k] = true; addTotal(); save();
-      out.textContent = '済'; btn.disabled = false; btn.textContent = 'もう一度'; toast('ありがとう'); buzz();
+      out.textContent = 'できた'; btn.disabled = false; btn.textContent = 'もう一度'; toast('ありがとう'); sparkle(out, 6); buzz();
     }
   }, 1000);
 }
@@ -785,7 +901,7 @@ function runBreath(btn, k, times) {
   const orb = document.getElementById('orb-' + k), say = document.getElementById('say-' + k);
   btn.disabled = true; let i = 0;
   const step = () => {
-    if (i >= times) { btn.disabled = false; say.textContent = `今日の深呼吸：${rec(ui.n).data[k]}回`; toast('ありがとう'); return; }
+    if (i >= times) { btn.disabled = false; say.textContent = `今日の深呼吸：${rec(ui.n).data[k]}回`; toast('ありがとう'); sparkle(orb, 6); return; }
     say.textContent = `${i + 1}回目　ゆっくり吸って…`; orb.classList.add('in');
     setTimeout(() => {
       say.textContent = '吐きながら「ありがとう」'; orb.classList.remove('in');
@@ -815,7 +931,7 @@ document.getElementById('importFile').addEventListener('change', async e => {
 render();
 
 // 新しい版をあげた時、スマホに古いページが残っていても自動で読み直す（あげ直すたびに VERSION を変える）
-const VERSION = '2026-10-29.3';
+const VERSION = '2026-10-29.4';
 fetch(location.pathname + '?t=' + Date.now(), { cache: 'no-store' }).then(r => r.text()).then(t => {
   const v = t.match(/const VERSION = '([^']+)'/)?.[1];
   let done = null; try { done = sessionStorage.getItem('reloadedFor'); } catch (e) {}

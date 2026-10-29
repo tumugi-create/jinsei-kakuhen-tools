@@ -3,49 +3,52 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#f5f0e6">
+<meta name="theme-color" content="#a55bd3">
 <title>人生確変ツール</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Klee+One:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@500&family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root { --paper: #f5f0e6; --sheet: #fffdf8; --ink: #2a2622; --sub: #6b6358; --rule: #d6ccba; --shu: #b8392a; --shu-soft: #f5e2dd; }
+:root { --bg: #fdf6fa; --card: #fff; --ink: #2e2442; --muted: #74688a; --line: #efe2ee; --pink: #e8568f; --pink-soft: #ffe7f0; }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) { --paper: #1c1a17; --sheet: #24211d; --ink: #ece5d7; --sub: #a99f90; --rule: #4b453c; --shu: #e06a55; --shu-soft: #3c2520; }
+  :root:not([data-theme="light"]) { --bg: #1a1426; --card: #251c36; --ink: #f4eefb; --muted: #bbb0d2; --line: #3b2f53; --pink: #ff8fbd; --pink-soft: #3d2338; }
 }
-:root[data-theme="dark"] { --paper: #1c1a17; --sheet: #24211d; --ink: #ece5d7; --sub: #a99f90; --rule: #4b453c; --shu: #e06a55; --shu-soft: #3c2520; }
+:root[data-theme="dark"] { --bg: #1a1426; --card: #251c36; --ink: #f4eefb; --muted: #bbb0d2; --line: #3b2f53; --pink: #ff8fbd; --pink-soft: #3d2338; }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--paper); color: var(--ink); font-family: "BIZ UDPGothic", "Hiragino Sans", sans-serif; font-size: 19px; line-height: 1.8; }
-.wrap { max-width: 640px; margin: 0 auto; padding: 20px 16px 48px; }
-h1 { font-family: "Klee One", serif; font-weight: 600; font-size: 1.45rem; margin: 0; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
-p.sub { color: var(--sub); font-size: .85rem; margin: 10px 0 24px; }
-.list { border-top: 1px solid var(--rule); }
-a.tool { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; color: var(--ink); text-decoration: none; padding: 18px 4px; border-bottom: 1px solid var(--rule); min-height: 5.5rem; }
-a.tool:active { background: var(--sheet); }
-.seal { width: 3rem; height: 3rem; border-radius: 50%; border: 2.5px solid var(--shu); color: var(--shu); background: var(--shu-soft);
-  display: flex; align-items: center; justify-content: center; font-family: "Klee One", serif; font-weight: 600; font-size: 1.3rem; transform: rotate(-8deg); }
-a.tool b { display: block; font-family: "Klee One", serif; font-weight: 600; font-size: 1.2rem; }
-a.tool small { display: block; font-size: .8rem; color: var(--sub); }
-a.tool .go { color: var(--sub); font-size: 1.3rem; }
-.soon { color: var(--sub); font-size: .8rem; padding: 16px 4px; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", sans-serif; font-size: 19px; line-height: 1.7; }
+.wrap { max-width: 640px; margin: 0 auto; padding: 24px 16px 48px; }
+h1 { font-family: "Kiwi Maru", serif; font-weight: 500; font-size: 1.5rem; margin: 0 0 4px; display: flex; align-items: center; gap: 8px; }
+svg.ico { width: 1.1em; height: 1.1em; fill: var(--pink-soft); stroke: var(--pink); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+p.sub { color: var(--muted); font-size: .85rem; margin: 0 0 20px; }
+a.tool {
+  position: relative; overflow: hidden; display: grid; grid-template-columns: 3.2rem 1fr auto; gap: 14px; align-items: center;
+  background: linear-gradient(140deg, #6a4fd8 0%, #a55bd3 40%, #ec6a9f 75%, #f99a74 100%); color: #fff;
+  text-decoration: none; border-radius: 24px; padding: 20px; margin-bottom: 14px; min-height: 6rem;
+  box-shadow: 0 10px 28px rgba(165,91,211,.25);
+}
+a.tool::after { content: ""; position: absolute; width: 180px; height: 180px; right: -60px; top: -80px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.28), rgba(255,255,255,0) 70%); }
+a.tool .ic { width: 3.2rem; height: 3.2rem; border-radius: 50%; background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; }
+a.tool .ic svg { width: 1.7rem; height: 1.7rem; fill: rgba(255,255,255,.3); stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+a.tool b { display: block; font-family: "Kiwi Maru", serif; font-weight: 500; font-size: 1.25rem; }
+a.tool small { display: block; font-size: .8rem; opacity: .92; }
+a.tool .go { font-size: 1.5rem; }
+.soon { border: 2px dashed var(--line); border-radius: 24px; padding: 18px; text-align: center; color: var(--muted); font-size: .85rem; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>人生確変ツール</h1>
-  <p class="sub">本で読んだことを、毎日の習慣にするための道具</p>
-  <div class="list">
-    <a class="tool" href="ザ・マジック/">
-      <span class="seal">謝</span>
-      <span><b>ザ・マジック</b><small>28日間の感謝の記録（ロンダ・バーン）</small></span>
-      <span class="go">›</span>
-    </a>
-  </div>
-  <p class="soon">道具は、これから少しずつ増やしていきます。</p>
+  <h1><svg class="ico" viewBox="0 0 24 24"><path d="M11 3.5c.7 4 2.2 5.5 6.2 6.2-4 .7-5.5 2.2-6.2 6.2-.7-4-2.2-5.5-6.2-6.2 4-.7 5.5-2.2 6.2-6.2z"/></svg>人生確変ツール</h1>
+  <p class="sub">本や考え方を、毎日の実践に変えるツール集</p>
+  <a class="tool" href="ザ・マジック/">
+    <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 20s-7.4-4.5-7.4-10a4.2 4.2 0 0 1 7.4-2.7A4.2 4.2 0 0 1 19.4 10c0 5.5-7.4 10-7.4 10z"/></svg></span>
+    <span><b>ザ・マジック</b><small>28日間の感謝の実践（ロンダ・バーン）</small></span>
+    <span class="go">›</span>
+  </a>
+  <div class="soon">ここに新しいツールが増えていきます</div>
 </div>
 <script>
 // 新しい版をあげた時、スマホに古いページが残っていても自動で読み直す（あげ直すたびに VERSION を変える）
-const VERSION = '2026-10-29.3';
+const VERSION = '2026-10-29.4';
 fetch(location.pathname + '?t=' + Date.now(), { cache: 'no-store' }).then(r => r.text()).then(t => {
   const v = t.match(/const VERSION = '([^']+)'/)?.[1];
   let done = null; try { done = sessionStorage.getItem('reloadedFor'); } catch (e) {}
