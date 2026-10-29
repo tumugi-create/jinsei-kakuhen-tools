@@ -43,5 +43,14 @@ a.tool .go { color: var(--sub); font-size: 1.3rem; }
   </div>
   <p class="soon">道具は、これから少しずつ増やしていきます。</p>
 </div>
+<script>
+// 新しい版をあげた時、スマホに古いページが残っていても自動で読み直す（あげ直すたびに VERSION を変える）
+const VERSION = '2026-10-29.3';
+fetch(location.pathname + '?t=' + Date.now(), { cache: 'no-store' }).then(r => r.text()).then(t => {
+  const v = t.match(/const VERSION = '([^']+)'/)?.[1];
+  let done = null; try { done = sessionStorage.getItem('reloadedFor'); } catch (e) {}
+  if (v && v !== VERSION && done !== v) { try { sessionStorage.setItem('reloadedFor', v); } catch (e) {} location.replace(location.pathname + '?v=' + v); }
+}).catch(() => {});
+</script>
 </body>
 </html>
