@@ -16,3 +16,19 @@
 2. その中に `index.html`（ツール本体）と `README.md`（使い方）を置く
 3. 上の表と、入口ページ `index.html` に1つずつ足す
 4. GitHub にあげ直す（下の「直したあと」）
+
+## 公開しているページ
+
+- 入口：https://tumugi-create.github.io/jinsei-kakuhen-tools/
+- ザ・マジック：https://tumugi-create.github.io/jinsei-kakuhen-tools/ザ・マジック/
+- 置き場所：https://github.com/tumugi-create/jinsei-kakuhen-tools （公開リポジトリ。見えるのはツールのファイルだけで、使う人の記録は各自の機械の中）
+
+## 直したあと
+
+このフォルダで次を打つと、1〜2分で公開ページに反映される。URLは変わらず、使う人の記録も消えない。
+
+```bash
+git add -A && git commit -m "直した内容" && git push
+```
+
+スマホで古いままに見える時は、ページを開き直す（下に引っぱって更新）。
