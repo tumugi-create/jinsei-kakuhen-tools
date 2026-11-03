@@ -93,6 +93,10 @@ input::placeholder, textarea::placeholder { color: var(--muted); opacity: .7; }
 input:focus, textarea:focus { outline: 3px solid var(--pink-soft); border-color: var(--pink); }
 textarea { min-height: 6rem; resize: vertical; }
 
+/* 入口（人生確変ツール）に戻るボタン。ほかのツールへ移る時に使う */
+a.home-link { display: inline-flex; align-items: center; gap: 2px; font-size: .8rem; color: var(--purple); background: var(--lav); border-radius: 999px; padding: 3px 14px 3px 10px; margin: 0 0 6px; text-decoration: none; }
+a.home-link:hover { background: var(--pink-soft); color: var(--pink); }
+a.home-link b { font-size: 1.1rem; line-height: 1; font-weight: 400; }
 header.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 4px 0 12px; }
 header.top h1 { font-size: 1.3rem; display: flex; align-items: center; gap: 6px; }
 header.top h1 .ico { color: var(--pink); width: 1.1em; height: 1.1em; fill: var(--pink-soft); }
@@ -642,7 +646,7 @@ function render() {
   root.dataset.size = curSize();
   if (ui.n == null) ui.n = currentN();
   const tabs = [['now', 'flask', '実験'], ['list', 'grid', '9つの実験'], ['log', 'book', 'レポート'], ['set', 'tune', '設定']];
-  let h = `<header class="top"><h1>${ico('flask')}<span>実験ノート<small>こうして、思考は現実になる</small></span></h1>
+  let h = `<a class="home-link no-print" href="../"><b>‹</b>人生確変ツール</a><header class="top"><h1>${ico('flask')}<span>実験ノート<small>こうして、思考は現実になる</small></span></h1>
     <div class="total">終えた実験<b>${doneCount()} / ${EXPS.length}</b></div></header>
     <nav class="tabs">${tabs.map(([k, i, l]) => `<button data-act="tab" data-tab="${k}" aria-current="${ui.tab === k}">${ico(i)}${l}</button>`).join('')}</nav>`;
   h += { now: viewNow, list: viewList, log: viewLog, set: viewSet }[ui.tab]();
@@ -933,7 +937,7 @@ if (!touch && Rec) {
 }
 
 // 新しい版をあげた時、古いページが残っていても自動で読み直す（あげ直すたびに VERSION を変える）
-const VERSION = '2026-11-04.1';
+const VERSION = '2026-11-04.2';
 fetch(location.pathname + '?t=' + Date.now(), { cache: 'no-store' }).then(r => r.text()).then(t => {
   const v = t.match(/const VERSION = '([^']+)'/)?.[1];
   let done = null; try { done = sessionStorage.getItem('reloadedFor'); } catch (e) {}

@@ -93,6 +93,10 @@ input::placeholder, textarea::placeholder { color: var(--muted); opacity: .7; }
 input:focus, textarea:focus { outline: 3px solid var(--pink-soft); border-color: var(--pink); }
 textarea { min-height: 6rem; resize: vertical; }
 
+/* 入口（人生確変ツール）に戻るボタン。ほかのツールへ移る時に使う */
+a.home-link { display: inline-flex; align-items: center; gap: 2px; font-size: .8rem; color: var(--purple); background: var(--lav); border-radius: 999px; padding: 3px 14px 3px 10px; margin: 0 0 6px; text-decoration: none; }
+a.home-link:hover { background: var(--pink-soft); color: var(--pink); }
+a.home-link b { font-size: 1.1rem; line-height: 1; font-weight: 400; }
 header.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 4px 0 12px; }
 header.top h1 { font-size: 1.3rem; display: flex; align-items: center; gap: 6px; }
 header.top h1 .ico { color: var(--pink); width: 1.1em; height: 1.1em; fill: var(--pink-soft); }
@@ -699,7 +703,7 @@ function render() {
   Object.values(timers).forEach(clearInterval);
   const cur = currentDay();
   if (ui.n == null) ui.n = cur;
-  let h = `<header class="top"><h1>${ico('spark')}<span>ザ・マジック<small>28日間の感謝の実践</small></span></h1>
+  let h = `<a class="home-link no-print" href="../"><b>‹</b>人生確変ツール</a><header class="top"><h1>${ico('spark')}<span>ザ・マジック<small>28日間の感謝の実践</small></span></h1>
     <div class="total">ありがとうの数<b id="total">${S.total}</b></div></header>`;
   if (!S.started) { app.innerHTML = h + intro(); return; }
   const tabs = [['today', 'home', '今日'], ['map', 'cal', '28日'], ['log', 'book', '記録'], ['wish', 'heart', '願い'], ['set', 'tune', '設定']];
@@ -1145,7 +1149,7 @@ if (!touch && Rec) {
 }
 
 // 新しい版をあげた時、スマホに古いページが残っていても自動で読み直す（あげ直すたびに VERSION を変える）
-const VERSION = '2026-11-04.1';
+const VERSION = '2026-11-04.2';
 fetch(location.pathname + '?t=' + Date.now(), { cache: 'no-store' }).then(r => r.text()).then(t => {
   const v = t.match(/const VERSION = '([^']+)'/)?.[1];
   let done = null; try { done = sessionStorage.getItem('reloadedFor'); } catch (e) {}

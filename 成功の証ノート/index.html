@@ -94,6 +94,10 @@ input:focus, textarea:focus { outline: 3px solid var(--pink-soft); border-color:
 textarea { min-height: 5rem; resize: vertical; }
 input[type="date"], input[type="month"] { -webkit-appearance: none; appearance: none; text-align: left; }
 
+/* 入口（人生確変ツール）に戻るボタン。ほかのツールへ移る時に使う */
+a.home-link { display: inline-flex; align-items: center; gap: 2px; font-size: .8rem; color: var(--purple); background: var(--lav); border-radius: 999px; padding: 3px 14px 3px 10px; margin: 0 0 6px; text-decoration: none; }
+a.home-link:hover { background: var(--pink-soft); color: var(--pink); }
+a.home-link b { font-size: 1.1rem; line-height: 1; font-weight: 400; }
 header.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 4px 0 12px; }
 header.top h1 { font-size: 1.3rem; display: flex; align-items: center; gap: 6px; }
 header.top h1 .ico { color: var(--pink); width: 1.1em; height: 1.1em; fill: var(--pink-soft); }
@@ -508,7 +512,7 @@ function render() {
   if (S.theme === 'auto') delete root.dataset.theme; else root.dataset.theme = S.theme;
   root.dataset.size = curSize();
   const tabs = [['today', 'spark', '今日'], ['blog', 'pen', 'ブログ'], ['board', 'crown', '成功の証'], ['woop', 'target', 'WOOP'], ['set', 'tune', '設定']];
-  let h = `<header class="top"><h1>${ico('crown')}<span>成功の証ノート<small>見える化して、手に入れる</small></span></h1>
+  let h = `<a class="home-link no-print" href="../"><b>‹</b>人生確変ツール</a><header class="top"><h1>${ico('crown')}<span>成功の証ノート<small>見える化して、手に入れる</small></span></h1>
     <div class="total">書いた記事<b>${S.posts.length}本</b></div></header>
     <nav class="tabs">${tabs.map(([k, i, l]) => `<button data-act="tab" data-tab="${k}" aria-current="${ui.tab === k}">${ico(i)}${l}</button>`).join('')}</nav>`;
   h += { today: viewToday, blog: viewBlog, board: viewBoard, woop: viewWoop, set: viewSet }[ui.tab]();
@@ -949,7 +953,7 @@ if (!touch && Rec) {
 }
 
 // 新しい版をあげた時、古いページが残っていても自動で読み直す（あげ直すたびに VERSION を変える）
-const VERSION = '2026-11-04.1';
+const VERSION = '2026-11-04.2';
 fetch(location.pathname + '?t=' + Date.now(), { cache: 'no-store' }).then(r => r.text()).then(t => {
   const v = t.match(/const VERSION = '([^']+)'/)?.[1];
   let done = null; try { done = sessionStorage.getItem('reloadedFor'); } catch (e) {}
