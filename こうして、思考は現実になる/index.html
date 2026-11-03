@@ -300,6 +300,15 @@ label.chk input { width: 28px; height: 28px; min-height: 0; accent-color: var(--
   background: var(--ink); color: var(--bg); padding: 12px 22px; border-radius: 999px; font-size: 1rem;
   transition: all .3s; pointer-events: none; z-index: 20; max-width: calc(100% - 32px); text-align: center; }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+/* パソコンで話して書くマイクのボタン（書く欄の右に出る） */
+.mic { position: fixed; z-index: 30; width: 34px; height: 34px; border-radius: 50%; border: 0; padding: 0; display: grid; place-items: center;
+  background: var(--lav); color: var(--purple); cursor: pointer; box-shadow: 0 2px 8px rgba(115,80,214,.18); }
+.mic svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.mic:hover { background: var(--pink-soft); color: var(--pink); }
+.mic.on { background: var(--pink); color: #fff; animation: micPulse 1.4s ease-in-out infinite; }
+@keyframes micPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(232,86,143,.45); } 50% { box-shadow: 0 0 0 9px rgba(232,86,143,0); } }
+.mic[hidden] { display: none; }
+.has-mic { padding-right: 48px !important; }
 @media (min-width: 768px) { .toast { bottom: 24px; } }
 
 /* キラッと・声かけ */
@@ -578,6 +587,7 @@ const RES = { yes: ['起きた！', 'spark'], some: ['少し起きた', 'wave'],
 
 // ---------- 状態 ----------
 const touch = matchMedia('(pointer: coarse)').matches;
+const Rec = window.SpeechRecognition || window.webkitSpeechRecognition;  // 話した声を文字にするしくみ（Chrome・Safari・Edge にある）
 const curSize = () => S.size || (touch ? 'l' : 'm');
 const rec = n => (S.exps[n] ??= { data: {}, log: [] });
 function status(n) { const r = S.exps[n]; return !r?.start ? 'todo' : r.result ? 'done' : 'active'; }
@@ -873,8 +883,57 @@ document.addEventListener('visibilitychange', () => { if (!document.hidden) upda
 
 render();
 
+// ---------- パソコンで話して書く ----------
+// スマホはキーボードのマイクで話せる。パソコンにはそれがないので、書く欄を押すと右にマイクのボタンを出す
+if (!touch && Rec) {
+  const mic = document.createElement('button');
+  mic.type = 'button'; mic.className = 'mic'; mic.hidden = true; mic.title = '押して話すと書けます（もう一度押すと止まる）';
+  mic.setAttribute('aria-label', '話して書く');
+  mic.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3.5" width="6" height="11" rx="3"/><path d="M6 11.5a6 6 0 0 0 12 0M12 17.5v3"/></svg>';
+  document.body.append(mic);
+  let field = null, sr = null;
+  const canTalk = el => el?.matches?.('textarea, input[type="text"]:not([inputmode="numeric"])');
+  const place = () => {
+    if (!field?.isConnected) return hide();
+    const r = field.getBoundingClientRect(), ta = field.tagName === 'TEXTAREA';
+    mic.style.left = r.right - (ta ? 50 : 42) + 'px';
+    mic.style.top = (ta ? r.bottom - 42 : r.top + (r.height - 34) / 2) + 'px';
+  };
+  const show = el => { if (field !== el) { field?.classList.remove('has-mic'); field = el; } el.classList.add('has-mic'); mic.hidden = false; place(); };
+  const hide = () => { sr?.abort(); field?.classList.remove('has-mic'); field = null; mic.hidden = true; };
+  const listen = () => {
+    const el = field, a = el.selectionStart ?? el.value.length, b = el.selectionEnd ?? a;
+    const before = el.value.slice(0, a), after = el.value.slice(b);
+    sr = new Rec(); sr.lang = 'ja-JP'; sr.continuous = true; sr.interimResults = true;
+    sr.onresult = e => {
+      let t = ''; for (const r of e.results) t += r[0].transcript;
+      el.value = before + t + after;
+      const c = before.length + t.length; el.setSelectionRange(c, c);
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+      place();
+    };
+    sr.onerror = e => {
+      if (e.error === 'not-allowed') toast('マイクが使えません。アドレス欄の左のマークから、マイクを「許可」にしてください');
+      else if (e.error === 'service-not-allowed') toast('Macの設定の「キーボード」で「音声入力」をオンにしてください');
+      else if (e.error === 'no-speech') toast('声が聞こえませんでした。もう一度押して話してください');
+      else if (e.error === 'network') toast('ネットにつながっている時だけ使えます');
+      else if (e.error !== 'aborted') toast('うまく聞き取れませんでした');
+    };
+    sr.onend = () => { sr = null; mic.classList.remove('on'); };
+    sr.start(); mic.classList.add('on'); toast('話してください。終わったらもう一度押します');
+  };
+  // 押しても書く欄から離れないようにする（離れると書く場所が分からなくなる）
+  mic.addEventListener('mousedown', e => e.preventDefault());
+  mic.addEventListener('click', () => { if (sr) sr.stop(); else if (field) listen(); });
+  document.addEventListener('focusin', e => canTalk(e.target) ? show(e.target) : hide());
+  document.addEventListener('focusout', () => setTimeout(() => { if (!canTalk(document.activeElement)) hide(); }));
+  addEventListener('scroll', () => field && place(), { passive: true });
+  addEventListener('resize', () => field && place());
+  document.addEventListener('mouseup', () => field && place());
+}
+
 // 新しい版をあげた時、古いページが残っていても自動で読み直す（あげ直すたびに VERSION を変える）
-const VERSION = '2026-10-29.1';
+const VERSION = '2026-11-04.1';
 fetch(location.pathname + '?t=' + Date.now(), { cache: 'no-store' }).then(r => r.text()).then(t => {
   const v = t.match(/const VERSION = '([^']+)'/)?.[1];
   let done = null; try { done = sessionStorage.getItem('reloadedFor'); } catch (e) {}
