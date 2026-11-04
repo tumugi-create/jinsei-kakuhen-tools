@@ -9,6 +9,7 @@
 | [ザ・マジック](ザ・マジック/) | ロンダ・バーン『ザ・マジック』の28日間の感謝の実践 | `ザ・マジック/index.html` をダブルクリック |
 | [こうして、思考は現実になる](こうして、思考は現実になる/) | パム・グラウト『こうして、思考は現実になる』の9つの実験ノート（本人用） | 公開ページから開く |
 | [成功の証ノート](成功の証ノート/) | ほしい物（成功の証）のボード、お金の道のり、ブログの記事と収益の記録、毎週のWOOP（本人用） | 公開ページから開く |
+| [自分像ノート](自分像ノート/) | 自分像（自分はこういう人間だ）を書きかえる毎日の流れ。朝の言葉・今日の証拠・寝る前の1場面（本人用） | 公開ページから開く |
 
 `index.html`（このフォルダ直下）は、ツール一覧の入口ページ。
 
@@ -25,6 +26,7 @@
 - ザ・マジック：https://tumugi-create.github.io/jinsei-kakuhen-tools/ザ・マジック/
 - こうして、思考は現実になる：https://tumugi-create.github.io/jinsei-kakuhen-tools/こうして、思考は現実になる/
 - 成功の証ノート：https://tumugi-create.github.io/jinsei-kakuhen-tools/成功の証ノート/
+- 自分像ノート：https://tumugi-create.github.io/jinsei-kakuhen-tools/%E8%87%AA%E5%88%86%E5%83%8F%E3%83%8E%E3%83%BC%E3%83%88/
 - 置き場所：https://github.com/tumugi-create/jinsei-kakuhen-tools （公開リポジトリ。見えるのはツールのファイルだけで、使う人の記録は各自の機械の中）
 
 ## 直したあと

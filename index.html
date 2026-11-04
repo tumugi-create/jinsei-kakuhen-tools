@@ -77,11 +77,16 @@ a.tool .go { font-size: 1.5rem; }
     <span><b>成功の証ノート</b><small>ほしい物のボードと、ブログを育てる記録</small></span>
     <span class="go">›</span>
   </a>
+  <a class="tool" href="自分像ノート/">
+    <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.3" r="3.8"/><path d="M4.8 20c.8-3.8 3.6-6 7.2-6s6.4 2.2 7.2 6"/><path d="M19 3.2c.3 1.5.8 2 2.3 2.3-1.5.3-2 .8-2.3 2.3-.3-1.5-.8-2-2.3-2.3 1.5-.3 2-.8 2.3-2.3z"/></svg></span>
+    <span><b>自分像ノート</b><small>朝の言葉・今日の証拠・寝る前の1場面</small></span>
+    <span class="go">›</span>
+  </a>
   <div class="soon">ここに新しいツールが増えていきます</div>
 </div>
 <script>
 // 新しい版をあげた時、スマホに古いページが残っていても自動で読み直す（あげ直すたびに VERSION を変える）
-const VERSION = '2026-10-29.8';
+const VERSION = '2026-11-04.3';
 fetch(location.pathname + '?t=' + Date.now(), { cache: 'no-store' }).then(r => r.text()).then(t => {
   const v = t.match(/const VERSION = '([^']+)'/)?.[1];
   let done = null; try { done = sessionStorage.getItem('reloadedFor'); } catch (e) {}
