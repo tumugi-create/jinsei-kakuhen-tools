@@ -337,7 +337,7 @@ const KEY = 'jibunzou.v1';
 // 2026-11-04 に本人と決めた言葉。どれも「もう叶っている」形で書く
 const WORDS0 = [
   '俺は月1000万を稼ぐ考え方と力を、もう持ってる',
-  '俺がやったことは、お金と信頼と結果になって、ちゃんと返ってきてる',
+  '俺がやったことは、お金と信頼と結果になって、ちゃんと返ってくる',
   '俺の顔つきは自信がにじみ出てて、どんどん引き締まってる',
   '俺は、黒のヴィトンを自然に着こなす男や',
   '俺といると、家族も恋人も仲間も笑顔になる',
@@ -370,7 +370,12 @@ let S = load();
 let ui = { tab: 'today', evK: 'money', evText: '', logAll: false };
 
 function load() {
-  try { return Object.assign(fresh(), JSON.parse(localStorage.getItem(KEY)) || {}); } catch (e) { return fresh(); }
+  try {
+    const s = Object.assign(fresh(), JSON.parse(localStorage.getItem(KEY)) || {});
+    // 2026-11-04 本人の希望で「返ってきてる」→「返ってくる」に直した。前の形のまま保存されていたら合わせる
+    for (const w of s.words) if (w.t === '俺がやったことは、お金と信頼と結果になって、ちゃんと返ってきてる') w.t = '俺がやったことは、お金と信頼と結果になって、ちゃんと返ってくる';
+    return s;
+  } catch (e) { return fresh(); }
 }
 function save() {
   try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { toast('保存できませんでした'); }
@@ -743,7 +748,7 @@ if (!touch && Rec) {
 }
 
 // 新しい版をあげた時、古いページが残っていても自動で読み直す（あげ直すたびに VERSION を変える）
-const VERSION = '2026-11-04.3';
+const VERSION = '2026-11-04.4';
 fetch(location.pathname + '?t=' + Date.now(), { cache: 'no-store' }).then(r => r.text()).then(t => {
   const v = t.match(/const VERSION = '([^']+)'/)?.[1];
   let done = null; try { done = sessionStorage.getItem('reloadedFor'); } catch (e) {}
